@@ -159,6 +159,8 @@
     .callout.warn   { background: #fff3e0; border-left: 4px solid #e07b39; }
     .callout.info   { background: #e8f4fd; border-left: 4px solid var(--sf-blue); }
     .callout.success{ background: #e0f4f8; border-left: 4px solid var(--nto-primary); }
+    .callout.expect { background: #eaf7ef; border-left: 4px solid #2e9e5a; }
+    .callout.expect .callout-icon { color: #2e9e5a; }
 
     /* ── Prompt cards ── */
     .prompt-card {
@@ -291,7 +293,7 @@
           <tr><td>3</td><td>Add the Product Discovery subagent from the Asset Library</td><td>~15 min</td></tr>
           <tr><td>4</td><td>Test the agent with real product queries</td><td>~12 min</td></tr>
           <tr><td>5</td><td>Add a new product and see it appear in search results instantly</td><td>~10 min</td></tr>
-          <tr><td>6</td><td>Run the full purchase journey and recap</td><td>~5 min</td></tr>
+          <tr><td>6</td><td>Explore all 7 topics, run a multi-topic conversation, and recap</td><td>~10 min</td></tr>
         </table>
       </div>
     </div>
@@ -312,6 +314,32 @@
           <tr><td><strong>Explorer</strong></td><td>The left panel in Agentforce Builder showing your agent's subagents and resources</td></tr>
           <tr><td><strong>Commit Version</strong></td><td>Publishing your draft changes so the agent uses them</td></tr>
         </table>
+      </div>
+    </div>
+  </div>
+
+    <div class="step">
+      <div class="step-header">
+        <div class="step-num">3</div>
+        <h3>Meet the Full Agent</h3>
+        <button class="complete-btn" onclick="toggleStep(this)">Mark Done</button>
+      </div>
+      <div class="step-body">
+        <p>Trail Guide is a <strong>customer super agent</strong> — not just a single-purpose bot. Before you start building, here's what it can do across <strong>7 topics</strong>:</p>
+        <table>
+          <tr><th>Topic</th><th>What It Does</th><th>Data Source</th></tr>
+          <tr><td>🛍️ Product Discovery</td><td>Search the catalog, filter by price, get personalized picks</td><td>Product2 records</td></tr>
+          <tr><td>📚 Product FAQ &amp; Knowledge</td><td>Answer product care, warranty, sizing, and policy questions</td><td>Knowledge articles</td></tr>
+          <tr><td>📦 Order Status</td><td>Look up orders by number or email and show items</td><td>Order / OrderItem records</td></tr>
+          <tr><td>❤️ Cart &amp; Wishlist</td><td>View, add, and remove saved items</td><td>Product2 records</td></tr>
+          <tr><td>📍 Store Locator</td><td>Find NTO stores by city, state, or zip</td><td>8 store locations</td></tr>
+          <tr><td>⭐ Loyalty &amp; Promotions</td><td>Check points, tier status, redeem promo codes</td><td>Loyalty records</td></tr>
+          <tr><td>🎧 Customer Service</td><td>Look up profiles, order history, open cases, start returns</td><td>Contact / Case / Order records</td></tr>
+        </table>
+        <div class="callout info">
+          <span class="callout-icon">🎯</span>
+          <span>In this workshop, <strong>you build Product Discovery</strong> (topic 1). The other 6 topics are pre-deployed and ready for you to test in Unit 6.</span>
+        </div>
       </div>
     </div>
   </div>
@@ -767,6 +795,10 @@
           <p>What would you recommend for me?</p>
           <button class="copy-prompt" onclick="copyPrompt(this)">Copy</button>
         </div>
+        <div class="callout expect">
+          <span class="callout-icon">✅</span>
+          <span><strong>What to expect:</strong> The agent searches the Product2 catalog and returns matching products with names, prices, and descriptions. Price-filter queries only return items under the given amount.</span>
+        </div>
 
         <p style="font-weight:700; margin:18px 0 8px; color:var(--nto-primary);">📚 Product FAQ &amp; Knowledge</p>
         <div class="prompt-card">
@@ -780,9 +812,13 @@
           <button class="copy-prompt" onclick="copyPrompt(this)">Copy</button>
         </div>
         <div class="prompt-card">
-          <div class="prompt-label">Return Policy</div>
-          <p>What's your return policy?</p>
+          <div class="prompt-label">Gift Card Policy</div>
+          <p>What is your gift card policy?</p>
           <button class="copy-prompt" onclick="copyPrompt(this)">Copy</button>
+        </div>
+        <div class="callout expect">
+          <span class="callout-icon">✅</span>
+          <span><strong>What to expect:</strong> The agent searches Knowledge articles and returns detailed answers from published articles — like the Gear Repair guide, warranty terms, or gift card policy details (denominations, expiration, refund rules).</span>
         </div>
 
         <p style="font-weight:700; margin:18px 0 8px; color:var(--nto-primary);">📦 Order Status &amp; Tracking</p>
@@ -796,6 +832,10 @@
           <p>Can you show me my recent orders?</p>
           <button class="copy-prompt" onclick="copyPrompt(this)">Copy</button>
         </div>
+        <div class="callout expect">
+          <span class="callout-icon">✅</span>
+          <span><strong>What to expect:</strong> The agent looks up real Order records and returns the order number, status (Activated), total amount, date, and a list of items. Asks for your email or order number if not provided.</span>
+        </div>
 
         <p style="font-weight:700; margin:18px 0 8px; color:var(--nto-primary);">❤️ Cart &amp; Wishlist</p>
         <div class="prompt-card">
@@ -807,6 +847,10 @@
           <div class="prompt-label">Add to Wishlist</div>
           <p>Add the Ridgeline Hiking Boot to my wishlist</p>
           <button class="copy-prompt" onclick="copyPrompt(this)">Copy</button>
+        </div>
+        <div class="callout expect">
+          <span class="callout-icon">✅</span>
+          <span><strong>What to expect:</strong> The agent manages saved items — viewing shows products with prices, adding confirms the product was found and saved. It asks for your email to identify your account.</span>
         </div>
 
         <p style="font-weight:700; margin:18px 0 8px; color:var(--nto-primary);">📍 Store Locator</p>
@@ -820,6 +864,10 @@
           <p>What are the hours for the San Francisco store?</p>
           <button class="copy-prompt" onclick="copyPrompt(this)">Copy</button>
         </div>
+        <div class="callout expect">
+          <span class="callout-icon">✅</span>
+          <span><strong>What to expect:</strong> The agent returns NTO store details — name, address, phone, hours, and special features (like "Gear rental available" or "Ski demo center"). Colorado matches Denver and Boulder stores.</span>
+        </div>
 
         <p style="font-weight:700; margin:18px 0 8px; color:var(--nto-primary);">⭐ Loyalty &amp; Customer Service (pre-built)</p>
         <div class="prompt-card">
@@ -832,6 +880,10 @@
           <p>Do I have any open support cases?</p>
           <button class="copy-prompt" onclick="copyPrompt(this)">Copy</button>
         </div>
+        <div class="callout expect">
+          <span class="callout-icon">✅</span>
+          <span><strong>What to expect:</strong> Loyalty queries return your points balance, tier (Bronze/Silver/Gold/Trailblazer), and available discounts. Support case queries show open case details including status and subject.</span>
+        </div>
 
         <div class="callout info">
           <span class="callout-icon">ℹ️</span>
@@ -843,6 +895,72 @@
     <div class="step">
       <div class="step-header">
         <div class="step-num">18</div>
+        <h3>Multi-Topic Conversation Flow</h3>
+        <button class="complete-btn" onclick="toggleStep(this)">Mark Done</button>
+      </div>
+      <div class="step-body">
+        <p>Now try a <strong>realistic customer journey</strong> — a single conversation that crosses multiple topics. Copy each prompt in order and watch the agent seamlessly switch between capabilities.</p>
+
+        <div class="prompt-card">
+          <div class="prompt-label">Step 1 — Product Search</div>
+          <p>I'm looking for a waterproof hiking jacket under $250</p>
+          <button class="copy-prompt" onclick="copyPrompt(this)">Copy</button>
+        </div>
+        <div class="callout expect">
+          <span class="callout-icon">✅</span>
+          <span><strong>Expect:</strong> Product Discovery searches the catalog and shows jackets under $250.</span>
+        </div>
+
+        <div class="prompt-card">
+          <div class="prompt-label">Step 2 — Product FAQ</div>
+          <p>How should I care for a waterproof jacket? What's the warranty?</p>
+          <button class="copy-prompt" onclick="copyPrompt(this)">Copy</button>
+        </div>
+        <div class="callout expect">
+          <span class="callout-icon">✅</span>
+          <span><strong>Expect:</strong> Routes to Product FAQ, searches Knowledge for care instructions and warranty details.</span>
+        </div>
+
+        <div class="prompt-card">
+          <div class="prompt-label">Step 3 — Wishlist</div>
+          <p>Save the Alpine Explorer Jacket to my wishlist</p>
+          <button class="copy-prompt" onclick="copyPrompt(this)">Copy</button>
+        </div>
+        <div class="callout expect">
+          <span class="callout-icon">✅</span>
+          <span><strong>Expect:</strong> Routes to Cart &amp; Wishlist and adds the product. May ask for your email to identify the account.</span>
+        </div>
+
+        <div class="prompt-card">
+          <div class="prompt-label">Step 4 — Store Locator</div>
+          <p>Can I try it on in a store near San Francisco?</p>
+          <button class="copy-prompt" onclick="copyPrompt(this)">Copy</button>
+        </div>
+        <div class="callout expect">
+          <span class="callout-icon">✅</span>
+          <span><strong>Expect:</strong> Routes to Store Locator and returns the NTO Flagship on Market Street with hours and features.</span>
+        </div>
+
+        <div class="prompt-card">
+          <div class="prompt-label">Step 5 — Loyalty</div>
+          <p>How many loyalty points do I have? Any discounts I can use?</p>
+          <button class="copy-prompt" onclick="copyPrompt(this)">Copy</button>
+        </div>
+        <div class="callout expect">
+          <span class="callout-icon">✅</span>
+          <span><strong>Expect:</strong> Routes to Loyalty &amp; Promotions and shows your points balance, tier, and available discounts.</span>
+        </div>
+
+        <div class="callout success">
+          <span class="callout-icon">🎯</span>
+          <span><strong>5 prompts. 5 different topics. Zero confusion.</strong> The agent seamlessly transitions between product search → FAQ → wishlist → store locator → loyalty. Each response draws from live data and the correct action. That's the power of a multi-topic super agent.</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-header">
+        <div class="step-num">19</div>
         <h3>What You Built</h3>
         <button class="complete-btn" onclick="toggleStep(this)">Mark Done</button>
       </div>
