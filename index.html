@@ -247,7 +247,7 @@
       <span class="step-dot">5</span> Add Products & Re-Search
     </a>
     <a href="#unit6" class="nav-link" data-section="unit6">
-      <span class="step-dot">6</span> What You Built
+      <span class="step-dot">6</span> Explore the Full Agent
     </a>
   </div>
   <div class="nav-section">
@@ -265,7 +265,7 @@
   <div class="hero">
     <div class="tag">Dreamforce 2026 · Hands-On Workshop</div>
     <h1>Product Discovery<br>with Agentforce</h1>
-    <p>Build a Product Discovery agent that searches a real product catalog, delivers personalized recommendations, and drives the entire purchase journey — all through natural conversation.</p>
+    <p>Build a Product Discovery topic for NTO's customer super agent — then explore 7 AI-powered capabilities including product search, FAQs, order tracking, wishlists, store locator, loyalty, and customer service.</p>
   </div>
 
   <!-- ── Intro ── -->
@@ -736,39 +736,106 @@
   <div class="section" id="unit6">
     <div class="unit-header">
       <div class="unit-num">6</div>
-      <div class="unit-title">The Full Purchase Journey</div>
+      <div class="unit-title">Explore the Full Agent</div>
     </div>
     <p style="font-size:14.5px; color:#444; margin-bottom:24px; line-height:1.7;">
-      Step back and see the big picture. Run a complete shopping session through the agent.
+      Trail Guide isn't just Product Discovery — it's a <strong>complete customer super agent</strong> with 7 topics. Try prompts across every capability: product search, FAQs, order tracking, wishlist, store locator, loyalty, and customer service.
     </p>
 
     <div class="step">
       <div class="step-header">
         <div class="step-num">17</div>
-        <h3>Run the Full Journey</h3>
+        <h3>Test All Agent Capabilities</h3>
         <button class="complete-btn" onclick="toggleStep(this)">Mark Done</button>
       </div>
       <div class="step-body">
-        <p>In Conversation Preview, walk through a complete shopping session:</p>
+        <p>In Conversation Preview, try prompts from each topic area. Watch how the agent routes to the right capability automatically.</p>
+
+        <p style="font-weight:700; margin:18px 0 8px; color:var(--nto-primary);">🛍️ Product Discovery (you built this!)</p>
         <div class="prompt-card">
-          <div class="prompt-label">1. Discovery</div>
+          <div class="prompt-label">Product Search</div>
           <p>I'm planning a weekend hiking trip — what do I need?</p>
           <button class="copy-prompt" onclick="copyPrompt(this)">Copy</button>
         </div>
         <div class="prompt-card">
-          <div class="prompt-label">2. Narrowing</div>
+          <div class="prompt-label">Price Filter</div>
           <p>Show me rain jackets under $200</p>
           <button class="copy-prompt" onclick="copyPrompt(this)">Copy</button>
         </div>
         <div class="prompt-card">
-          <div class="prompt-label">3. Comparison</div>
-          <p>What's the difference between the Cascade Hardshell and the Trail Rain Jacket?</p>
+          <div class="prompt-label">Personalized Recommendations</div>
+          <p>What would you recommend for me?</p>
+          <button class="copy-prompt" onclick="copyPrompt(this)">Copy</button>
+        </div>
+
+        <p style="font-weight:700; margin:18px 0 8px; color:var(--nto-primary);">📚 Product FAQ &amp; Knowledge</p>
+        <div class="prompt-card">
+          <div class="prompt-label">Product Care</div>
+          <p>How do I clean and maintain my hiking boots?</p>
           <button class="copy-prompt" onclick="copyPrompt(this)">Copy</button>
         </div>
         <div class="prompt-card">
-          <div class="prompt-label">4. Cross-sell</div>
-          <p>What else goes well with the Trail Rain Jacket?</p>
+          <div class="prompt-label">Warranty Info</div>
+          <p>What does the NTO warranty cover?</p>
           <button class="copy-prompt" onclick="copyPrompt(this)">Copy</button>
+        </div>
+        <div class="prompt-card">
+          <div class="prompt-label">Return Policy</div>
+          <p>What's your return policy?</p>
+          <button class="copy-prompt" onclick="copyPrompt(this)">Copy</button>
+        </div>
+
+        <p style="font-weight:700; margin:18px 0 8px; color:var(--nto-primary);">📦 Order Status &amp; Tracking</p>
+        <div class="prompt-card">
+          <div class="prompt-label">Order Lookup</div>
+          <p>What's the status of order 00000106?</p>
+          <button class="copy-prompt" onclick="copyPrompt(this)">Copy</button>
+        </div>
+        <div class="prompt-card">
+          <div class="prompt-label">Order History</div>
+          <p>Can you show me my recent orders?</p>
+          <button class="copy-prompt" onclick="copyPrompt(this)">Copy</button>
+        </div>
+
+        <p style="font-weight:700; margin:18px 0 8px; color:var(--nto-primary);">❤️ Cart &amp; Wishlist</p>
+        <div class="prompt-card">
+          <div class="prompt-label">View Wishlist</div>
+          <p>What's on my wishlist?</p>
+          <button class="copy-prompt" onclick="copyPrompt(this)">Copy</button>
+        </div>
+        <div class="prompt-card">
+          <div class="prompt-label">Add to Wishlist</div>
+          <p>Add the Ridgeline Hiking Boot to my wishlist</p>
+          <button class="copy-prompt" onclick="copyPrompt(this)">Copy</button>
+        </div>
+
+        <p style="font-weight:700; margin:18px 0 8px; color:var(--nto-primary);">📍 Store Locator</p>
+        <div class="prompt-card">
+          <div class="prompt-label">Find a Store</div>
+          <p>Where's the nearest NTO store in Colorado?</p>
+          <button class="copy-prompt" onclick="copyPrompt(this)">Copy</button>
+        </div>
+        <div class="prompt-card">
+          <div class="prompt-label">Store Hours</div>
+          <p>What are the hours for the San Francisco store?</p>
+          <button class="copy-prompt" onclick="copyPrompt(this)">Copy</button>
+        </div>
+
+        <p style="font-weight:700; margin:18px 0 8px; color:var(--nto-primary);">⭐ Loyalty &amp; Customer Service (pre-built)</p>
+        <div class="prompt-card">
+          <div class="prompt-label">Loyalty Points</div>
+          <p>How many loyalty points do I have?</p>
+          <button class="copy-prompt" onclick="copyPrompt(this)">Copy</button>
+        </div>
+        <div class="prompt-card">
+          <div class="prompt-label">Support Case</div>
+          <p>Do I have any open support cases?</p>
+          <button class="copy-prompt" onclick="copyPrompt(this)">Copy</button>
+        </div>
+
+        <div class="callout info">
+          <span class="callout-icon">ℹ️</span>
+          <span>Every response comes from <strong>live data</strong> — real products, real orders, real Knowledge articles, real store locations. No hardcoded responses. The agent automatically routes each question to the right topic and action.</span>
         </div>
       </div>
     </div>
@@ -781,17 +848,18 @@
       </div>
       <div class="step-body">
         <table>
-          <tr><th>Achievement</th><th>Capability</th></tr>
-          <tr><td>Explored a pre-configured agent</td><td>Agentforce Builder</td></tr>
-          <tr><td>Added Product Discovery from the Asset Library</td><td>Live Data Search</td></tr>
-          <tr><td>Tested with real product queries</td><td>Natural Language Search</td></tr>
-          <tr><td>Personalized recommendations using purchase history</td><td>AI Personalization</td></tr>
-          <tr><td>Added new products and saw them instantly in search</td><td>Context Grounding</td></tr>
-          <tr><td>Ran the full purchase journey</td><td>Discovery → Conversion</td></tr>
+          <tr><th>Topic</th><th>Capability</th></tr>
+          <tr><td>🛍️ Product Discovery <em>(you built this)</em></td><td>Natural language search, price filtering, personalized recommendations</td></tr>
+          <tr><td>📚 Product FAQ &amp; Knowledge</td><td>Knowledge article search for policies, care guides, sizing, warranty</td></tr>
+          <tr><td>📦 Order Status</td><td>Order lookup by number or email, order details and item list</td></tr>
+          <tr><td>❤️ Cart &amp; Wishlist</td><td>View, add, and remove saved items</td></tr>
+          <tr><td>📍 Store Locator</td><td>Find stores by city, state, or zip with hours and features</td></tr>
+          <tr><td>⭐ Loyalty &amp; Promotions</td><td>Points balance, tier status, promo codes, discounts</td></tr>
+          <tr><td>🎧 Customer Service</td><td>Profile lookup, order history, open cases, returns</td></tr>
         </table>
         <div class="callout success">
           <span class="callout-icon">🏔️</span>
-          <span><strong>One agent. Real products. Real personalization. Real results.</strong> Every product, price, and recommendation came from your actual catalog — no hallucination, no hardcoded responses.</span>
+          <span><strong>One agent. Seven topics. A true customer super agent.</strong> Trail Guide handles the entire customer journey — from product discovery to order tracking to store visits — all through natural conversation, grounded in real data.</span>
         </div>
       </div>
     </div>
