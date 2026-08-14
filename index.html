@@ -1,6 +1,960 @@
-# Paste the content into a new file using your text editor:
-pbpaste > index.html   # if you copied it to clipboard on Mac
-# OR open with nano/vim and paste
-git add index.html
-git commit -m "Redesign guide with corrected instructions and screenshots"
-git push origin main
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NTO Trail Guide Workshop — Dreamforce 2026</title>
+  <style>
+    /* ── Reset & tokens ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --nto-green:   #2e6b3e;
+      --nto-green-d: #1e4a2a;
+      --nto-tan:     #f5f0e8;
+      --nto-orange:  #d4622a;
+      --sf-blue:     #0070d2;
+      --sf-blue-d:   #005fb2;
+      --text:        #1a1a1a;
+      --muted:       #555;
+      --border:      #ddd;
+      --sidebar-w:   280px;
+      --header-h:    56px;
+    }
+    body { font-family: "Salesforce Sans", "Helvetica Neue", Arial, sans-serif; color: var(--text); background: #fff; }
+
+    /* ── Top bar ── */
+    header {
+      position: fixed; top: 0; left: 0; right: 0; height: var(--header-h);
+      background: var(--nto-green); color: #fff;
+      display: flex; align-items: center; padding: 0 24px;
+      z-index: 100; gap: 16px;
+      box-shadow: 0 2px 6px rgba(0,0,0,.2);
+    }
+    header .logo { font-size: 20px; font-weight: 700; letter-spacing: .5px; }
+    header .logo span { color: #a8d5b5; }
+    header .subtitle { font-size: 13px; color: #c5e0cb; margin-left: auto; }
+    header .progress-pill {
+      background: rgba(255,255,255,.15); border-radius: 20px;
+      padding: 4px 14px; font-size: 13px; display: flex; align-items: center; gap: 8px;
+    }
+    header .progress-pill button {
+      background: none; border: 1px solid rgba(255,255,255,.4); color: #fff;
+      border-radius: 12px; padding: 2px 10px; font-size: 11px; cursor: pointer;
+    }
+    header .progress-pill button:hover { background: rgba(255,255,255,.1); }
+
+    /* ── Layout ── */
+    .layout { display: flex; padding-top: var(--header-h); min-height: 100vh; }
+
+    /* ── Sidebar ── */
+    nav {
+      width: var(--sidebar-w); flex-shrink: 0;
+      position: fixed; top: var(--header-h); left: 0; bottom: 0;
+      overflow-y: auto; background: var(--nto-tan);
+      border-right: 1px solid var(--border); padding: 20px 0;
+    }
+    nav .nav-section { margin-bottom: 4px; }
+    nav .nav-section-title {
+      font-size: 10px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase;
+      color: var(--muted); padding: 6px 20px 4px;
+    }
+    nav a {
+      display: flex; align-items: center; gap: 10px;
+      padding: 8px 20px; font-size: 13.5px; color: var(--text);
+      text-decoration: none; border-left: 3px solid transparent;
+      transition: background .15s, border-color .15s;
+    }
+    nav a:hover { background: #e8e1d4; }
+    nav a.active { border-left-color: var(--nto-green); background: #e2f0e6; color: var(--nto-green-d); font-weight: 600; }
+    nav a.done .step-dot { background: var(--nto-green); }
+    nav .step-dot {
+      width: 20px; height: 20px; border-radius: 50%;
+      background: #ccc; display: flex; align-items: center; justify-content: center;
+      font-size: 10px; font-weight: 700; color: #fff; flex-shrink: 0;
+    }
+    nav .step-dot.active-dot { background: var(--nto-orange); }
+    nav .time-badge {
+      margin-left: auto; font-size: 10px; color: var(--muted);
+      background: #ddd6c8; padding: 1px 6px; border-radius: 10px;
+    }
+
+    /* ── Main content ── */
+    main {
+      margin-left: var(--sidebar-w);
+      padding: 48px 64px 120px;
+      max-width: 860px; flex: 1;
+    }
+
+    /* ── Hero ── */
+    .hero {
+      background: linear-gradient(135deg, var(--nto-green) 0%, var(--nto-green-d) 100%);
+      color: #fff; border-radius: 12px; padding: 40px 48px; margin-bottom: 48px;
+    }
+    .hero .tag { font-size: 11px; letter-spacing: 1px; text-transform: uppercase; color: #a8d5b5; margin-bottom: 8px; }
+    .hero h1 { font-size: 28px; font-weight: 800; line-height: 1.25; margin-bottom: 12px; }
+    .hero p { font-size: 15px; color: #d4eeda; line-height: 1.6; max-width: 540px; }
+    .hero .stats {
+      display: flex; gap: 32px; margin-top: 28px;
+      border-top: 1px solid rgba(255,255,255,.2); padding-top: 24px;
+    }
+    .hero .stat .val { font-size: 28px; font-weight: 800; }
+    .hero .stat .lbl { font-size: 11px; color: #a8d5b5; text-transform: uppercase; letter-spacing: .5px; }
+
+    /* ── Section headings ── */
+    .unit-header {
+      display: flex; align-items: center; gap: 16px;
+      margin-bottom: 24px; padding-bottom: 16px;
+      border-bottom: 2px solid var(--border);
+    }
+    .unit-num {
+      width: 44px; height: 44px; border-radius: 50%;
+      background: var(--nto-green); color: #fff;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px; font-weight: 800; flex-shrink: 0;
+    }
+    .unit-title { font-size: 22px; font-weight: 700; }
+    .unit-time {
+      margin-left: auto; font-size: 12px; color: var(--muted);
+      background: var(--nto-tan); padding: 4px 12px; border-radius: 20px;
+      border: 1px solid var(--border);
+    }
+
+    /* ── Step cards ── */
+    .step {
+      border: 1px solid var(--border); border-radius: 8px;
+      margin-bottom: 20px; overflow: hidden;
+    }
+    .step-header {
+      display: flex; align-items: center; gap: 12px;
+      padding: 14px 20px; background: #fafafa;
+      border-bottom: 1px solid var(--border);
+    }
+    .step-num {
+      width: 28px; height: 28px; border-radius: 50%;
+      background: var(--nto-orange); color: #fff;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 13px; font-weight: 700; flex-shrink: 0;
+    }
+    .step-header h3 { font-size: 15px; font-weight: 600; }
+    .step-header .complete-btn {
+      margin-left: auto; background: none;
+      border: 1.5px solid var(--border); border-radius: 6px;
+      padding: 4px 14px; font-size: 12px; cursor: pointer; color: var(--muted);
+      transition: all .15s;
+    }
+    .step-header .complete-btn:hover { border-color: var(--nto-green); color: var(--nto-green); }
+    .step-header .complete-btn.done { background: var(--nto-green); color: #fff; border-color: var(--nto-green); }
+    .step-body { padding: 20px 24px; }
+    .step-body p { font-size: 14.5px; line-height: 1.7; margin-bottom: 12px; color: #333; }
+    .step-body ol, .step-body ul { padding-left: 20px; margin-bottom: 12px; }
+    .step-body li { font-size: 14.5px; line-height: 1.7; margin-bottom: 6px; }
+    .step-body strong { color: var(--text); }
+
+    /* ── Screenshots ── */
+    .screenshot {
+      margin: 16px 0; border: 1px solid var(--border); border-radius: 8px;
+      overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,.08);
+    }
+    .screenshot img { width: 100%; display: block; }
+    .screenshot .caption {
+      background: #f8f8f8; padding: 8px 14px; font-size: 12px; color: var(--muted);
+      border-top: 1px solid var(--border);
+    }
+
+    /* ── Callouts ── */
+    .callout {
+      border-radius: 6px; padding: 14px 18px; margin: 16px 0;
+      font-size: 13.5px; line-height: 1.6;
+      display: flex; gap: 12px; align-items: flex-start;
+    }
+    .callout-icon { font-size: 16px; flex-shrink: 0; margin-top: 1px; }
+    .callout.tip    { background: #fffbe6; border-left: 4px solid #f0c040; }
+    .callout.warn   { background: #fff3e0; border-left: 4px solid #e07b39; }
+    .callout.info   { background: #e8f4fd; border-left: 4px solid var(--sf-blue); }
+    .callout.success{ background: #e8f5e9; border-left: 4px solid var(--nto-green); }
+
+    /* ── Prompt cards ── */
+    .prompt-card {
+      background: linear-gradient(135deg, #1e1e2e, #2a2a3e);
+      border-radius: 8px; padding: 20px 24px; margin: 12px 0;
+      border-left: 4px solid var(--nto-orange);
+    }
+    .prompt-card .prompt-label { font-size: 10px; color: #888; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 8px; }
+    .prompt-card p { color: #e0e0f0; font-size: 14px; line-height: 1.6; font-style: italic; }
+    .prompt-card .copy-prompt {
+      margin-top: 12px; background: none; border: 1px solid rgba(255,255,255,.2);
+      color: #aaa; border-radius: 4px; padding: 4px 12px; font-size: 11px; cursor: pointer;
+    }
+    .prompt-card .copy-prompt:hover { border-color: var(--nto-orange); color: var(--nto-orange); }
+
+    /* ── Data table ── */
+    table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 13.5px; }
+    th { background: var(--nto-tan); text-align: left; padding: 10px 14px; font-weight: 600; border-bottom: 2px solid var(--border); }
+    td { padding: 10px 14px; border-bottom: 1px solid #eee; }
+    tr:hover td { background: #fafafa; }
+
+    /* ── Section divider ── */
+    .section { margin-bottom: 64px; scroll-margin-top: 80px; }
+
+    /* ── Footer ── */
+    .footer-bar {
+      background: var(--nto-tan); border-top: 1px solid var(--border);
+      padding: 32px 64px; margin-left: var(--sidebar-w);
+      font-size: 13px; color: var(--muted);
+      display: flex; gap: 32px; align-items: center;
+    }
+    .footer-bar a { color: var(--sf-blue); text-decoration: none; }
+    .footer-bar a:hover { text-decoration: underline; }
+
+    /* ── Responsive ── */
+    @media (max-width: 900px) {
+      nav { display: none; }
+      main { margin-left: 0; padding: 32px 20px 80px; }
+      .footer-bar { margin-left: 0; padding: 24px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── Header ── -->
+<header>
+  <div class="logo">NTO <span>Trail Guide</span></div>
+  <div class="subtitle">Dreamforce 2026 · Retail Industry Workshop</div>
+  <div class="progress-pill">
+    <span id="progress-text">0 / 0 steps</span>
+    <button onclick="resetProgress()">Reset</button>
+  </div>
+</header>
+
+<div class="layout">
+
+<!-- ── Sidebar ── -->
+<nav id="sidebar">
+  <div class="nav-section">
+    <div class="nav-section-title">Getting Started</div>
+    <a href="#intro" class="nav-link" data-section="intro">
+      <span class="step-dot">i</span> Introduction
+    </a>
+    <a href="#unit0" class="nav-link" data-section="unit0">
+      <span class="step-dot">0</span> Getting Your Org Prepared
+      <span class="time-badge">0–5 min</span>
+    </a>
+  </div>
+  <div class="nav-section">
+    <div class="nav-section-title">Workshop Units</div>
+    <a href="#unit1" class="nav-link" data-section="unit1">
+      <span class="step-dot">1</span> Explore the Catalog
+      <span class="time-badge">5–10 min</span>
+    </a>
+    <a href="#unit2" class="nav-link" data-section="unit2">
+      <span class="step-dot">2</span> Meet Trail Guide
+      <span class="time-badge">10–18 min</span>
+    </a>
+    <a href="#unit3" class="nav-link" data-section="unit3">
+      <span class="step-dot">3</span> Build: Product Discovery
+      <span class="time-badge">18–33 min</span>
+    </a>
+    <a href="#unit4" class="nav-link" data-section="unit4">
+      <span class="step-dot">4</span> Test the Agent
+      <span class="time-badge">33–45 min</span>
+    </a>
+    <a href="#unit5" class="nav-link" data-section="unit5">
+      <span class="step-dot">5</span> Add Products & Re-Search
+      <span class="time-badge">45–55 min</span>
+    </a>
+    <a href="#unit6" class="nav-link" data-section="unit6">
+      <span class="step-dot">6</span> What You Built
+      <span class="time-badge">55–60 min</span>
+    </a>
+  </div>
+  <div class="nav-section">
+    <div class="nav-section-title">Resources</div>
+    <a href="#resources" class="nav-link" data-section="resources">
+      <span class="step-dot" style="background:#888">R</span> Links &amp; Docs
+    </a>
+  </div>
+</nav>
+
+<!-- ── Main ── -->
+<main>
+
+  <!-- ── Hero ── -->
+  <div class="hero">
+    <div class="tag">Dreamforce 2026 · Hands-On Workshop</div>
+    <h1>Product Discovery<br>with Agentforce</h1>
+    <p>Build a Product Discovery agent that searches a real product catalog, delivers personalized recommendations, and drives the entire purchase journey — all in 60 minutes.</p>
+    <div class="stats">
+      <div class="stat"><div class="val">60</div><div class="lbl">Minutes</div></div>
+      <div class="stat"><div class="val">6</div><div class="lbl">Units</div></div>
+      <div class="stat"><div class="val">40</div><div class="lbl">Products</div></div>
+      <div class="stat"><div class="val">1</div><div class="lbl">Agent</div></div>
+    </div>
+  </div>
+
+  <!-- ── Intro ── -->
+  <div class="section" id="intro">
+    <div class="unit-header">
+      <div class="unit-num" style="background:#555">i</div>
+      <div class="unit-title">Introduction</div>
+    </div>
+
+    <div class="step">
+      <div class="step-header">
+        <div class="step-num">1</div>
+        <h3>What You'll Build</h3>
+        <button class="complete-btn" onclick="toggleStep(this)">Mark Done</button>
+      </div>
+      <div class="step-body">
+        <p>Northern Trail Outfitters (NTO) sells outdoor gear across 9 product categories — from outerwear and footwear to camping and electronics. In this workshop, you'll extend <strong>Trail Guide</strong>, NTO's AI shopping assistant, by adding a <strong>Product Discovery</strong> capability so customers can search the catalog, get personalized recommendations, and explore products through natural conversation.</p>
+        <table>
+          <tr><th>Unit</th><th>What You'll Do</th><th>Time</th></tr>
+          <tr><td>0</td><td>Get your org ready</td><td>~5 min</td></tr>
+          <tr><td>1</td><td>Explore the NTO product catalog (40 products, 9 categories)</td><td>~5 min</td></tr>
+          <tr><td>2</td><td>Open Trail Guide in Agentforce Builder and explore what's pre-configured</td><td>~8 min</td></tr>
+          <tr><td>3</td><td>Add the Product Discovery subagent from the Asset Library</td><td>~15 min</td></tr>
+          <tr><td>4</td><td>Test the agent with real product queries</td><td>~12 min</td></tr>
+          <tr><td>5</td><td>Add a new product and see it appear in search results instantly</td><td>~10 min</td></tr>
+          <tr><td>6</td><td>Run the full purchase journey and recap</td><td>~5 min</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-header">
+        <div class="step-num">2</div>
+        <h3>Terminology Cheat Sheet</h3>
+        <button class="complete-btn" onclick="toggleStep(this)">Mark Done</button>
+      </div>
+      <div class="step-body">
+        <table>
+          <tr><th>Term</th><th>What it means in this workshop</th></tr>
+          <tr><td><strong>Trail Guide</strong></td><td>The NTO AI shopping assistant you're extending</td></tr>
+          <tr><td><strong>Subagent</strong></td><td>A specialized module Trail Guide delegates to (Product Discovery, Customer Service, Loyalty)</td></tr>
+          <tr><td><strong>Action</strong></td><td>A backend function the subagent can call (e.g., Search Product Catalog)</td></tr>
+          <tr><td><strong>Asset Library</strong></td><td>A library of pre-built subagents you can add to your agent</td></tr>
+          <tr><td><strong>Explorer</strong></td><td>The left panel in Agentforce Builder showing your agent's subagents and resources</td></tr>
+          <tr><td><strong>Commit Version</strong></td><td>Publishing your draft changes so the agent uses them</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Unit 0: Getting Your Org Prepared ── -->
+  <div class="section" id="unit0">
+    <div class="unit-header">
+      <div class="unit-num" style="background:#888">0</div>
+      <div class="unit-title">Getting Your Org Prepared</div>
+      <div class="unit-time">0 – 5 min</div>
+    </div>
+
+    <div class="step">
+      <div class="step-header">
+        <div class="step-num">3</div>
+        <h3>Sign Up for a Salesforce Org</h3>
+        <button class="complete-btn" onclick="toggleStep(this)">Mark Done</button>
+      </div>
+      <div class="step-body">
+        <ol>
+          <li>In your web browser go to this link: <a href="https://orgfarm.salesforce.com/signup" target="_blank"><strong>https://orgfarm.salesforce.com/signup</strong></a></li>
+          <li>Enter the <strong>event code</strong> provided by your instructor.</li>
+        </ol>
+        <div class="callout tip">
+          <span class="callout-icon">💡</span>
+          <span>After you've requested your org, you will get an email with a login link.</span>
+        </div>
+        <div class="callout warn">
+          <span class="callout-icon">⚠️</span>
+          <span>If your link expires, go to <a href="https://orgfarm.salesforce.com/signup" target="_blank">https://orgfarm.salesforce.com/signup</a>, input the event code, and select the option to resend your login link.</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-header">
+        <div class="step-num">4</div>
+        <h3>Log In and Verify</h3>
+        <button class="complete-btn" onclick="toggleStep(this)">Mark Done</button>
+      </div>
+      <div class="step-body">
+        <ol>
+          <li>Click the login link from your email.</li>
+          <li>You'll land on the NTO org home page. Confirm you see <strong>"Northern Trail Outfitters"</strong> in the org.</li>
+        </ol>
+        <div class="screenshot">
+          <img src="https://assets.meshmesh.io/tenants/org_01KDY098Y468ZK9Q6DFDZXJBG6/task-assets/d7c03efa-85e3-48dc-ab81-181132b7affa/0d1099dc-348f-421c-9fe9-0d5a42d96a65.png" alt="Salesforce org home page after login">
+          <div class="caption">Your org home page after logging in</div>
+        </div>
+        <div class="callout tip">
+          <span class="callout-icon">💡</span>
+          <span>If the login link doesn't work, ask a facilitator for help.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Unit 1: Explore the Catalog ── -->
+  <div class="section" id="unit1">
+    <div class="unit-header">
+      <div class="unit-num">1</div>
+      <div class="unit-title">Explore the NTO Product Catalog</div>
+      <div class="unit-time">5 – 10 min</div>
+    </div>
+    <p style="font-size:14.5px; color:#444; margin-bottom:24px; line-height:1.7;">
+      NTO sells outdoor gear across 9 categories. Let's see the 40 products that power the agent's product search.
+    </p>
+
+    <div class="step">
+      <div class="step-header">
+        <div class="step-num">5</div>
+        <h3>Open the Products List</h3>
+        <button class="complete-btn" onclick="toggleStep(this)">Mark Done</button>
+      </div>
+      <div class="step-body">
+        <ol>
+          <li>Click the <strong>App Launcher</strong> (9-dot grid icon, top-left corner).</li>
+          <li>Type <strong>"Products"</strong> in the search box and click <strong>Products</strong>.</li>
+        </ol>
+        <div class="screenshot">
+          <img src="https://assets.meshmesh.io/tenants/org_01KDY098Y468ZK9Q6DFDZXJBG6/task-assets/d7c03efa-85e3-48dc-ab81-181132b7affa/f0a796ed-1ac3-4a12-b114-d8c7ec228b91.png" alt="Products list showing Recently Viewed">
+          <div class="caption">Products list — initially shows "Recently Viewed" which may be empty</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-header">
+        <div class="step-num">6</div>
+        <h3>Switch to All Products View</h3>
+        <button class="complete-btn" onclick="toggleStep(this)">Mark Done</button>
+      </div>
+      <div class="step-body">
+        <ol>
+          <li>The list view defaults to <strong>"Recently Viewed"</strong> which may show 0 items. Click the list view dropdown that says <strong>"Recently Viewed"</strong>.</li>
+          <li>Select <strong>"All Products"</strong> from the dropdown.</li>
+        </ol>
+        <div class="screenshot">
+          <img src="https://assets.meshmesh.io/tenants/org_01KDY098Y468ZK9Q6DFDZXJBG6/task-assets/d7c03efa-85e3-48dc-ab81-181132b7affa/90fff536-8725-48c6-b9b1-9b26a46b14b8.png" alt="List view dropdown showing All Products option">
+          <div class="caption">Click the dropdown and select "All Products"</div>
+        </div>
+        <ol start="3">
+          <li>You should now see <strong>40 products</strong> across 9 categories.</li>
+        </ol>
+        <div class="screenshot">
+          <img src="https://assets.meshmesh.io/tenants/org_01KDY098Y468ZK9Q6DFDZXJBG6/task-assets/d7c03efa-85e3-48dc-ab81-181132b7affa/6739427d-aeeb-48f0-958b-e563db29fe53.png" alt="All Products list view showing 40 products">
+          <div class="caption">All Products view — 40 products across Outerwear, Footwear, Apparel, Accessories, Packs, Camping, Electronics, Nutrition, Cycling</div>
+        </div>
+        <div class="callout info">
+          <span class="callout-icon">ℹ️</span>
+          <span>This is the real data your agent will search. Every product has a name, description, category, and price. When customers ask "show me jackets under $200" — the agent queries this catalog live.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Unit 2: Meet Trail Guide ── -->
+  <div class="section" id="unit2">
+    <div class="unit-header">
+      <div class="unit-num">2</div>
+      <div class="unit-title">Meet Trail Guide Agent</div>
+      <div class="unit-time">10 – 18 min</div>
+    </div>
+    <p style="font-size:14.5px; color:#444; margin-bottom:24px; line-height:1.7;">
+      Trail Guide is NTO's AI shopping assistant. It's pre-configured with two subagents (Customer Service and Loyalty) — but it <strong>can't search products yet</strong>. That's what you'll build.
+    </p>
+
+    <div class="step">
+      <div class="step-header">
+        <div class="step-num">7</div>
+        <h3>Open Trail Guide in Agentforce Builder</h3>
+        <button class="complete-btn" onclick="toggleStep(this)">Mark Done</button>
+      </div>
+      <div class="step-body">
+        <ol>
+          <li>Click the <strong>gear icon</strong> (top right) to go to <strong>Setup</strong>.</li>
+          <li>In the Quick Find box, type <strong>"Agents"</strong>.</li>
+          <li>Under <strong>Agentforce Studio</strong>, click <strong>Agents</strong> (or <strong>Agentforce Agents</strong>).</li>
+        </ol>
+        <div class="screenshot">
+          <img src="https://assets.meshmesh.io/tenants/org_01KDY098Y468ZK9Q6DFDZXJBG6/task-assets/d7c03efa-85e3-48dc-ab81-181132b7affa/7809eccd-d345-4d29-b806-4f5aa022ac50.png" alt="Setup Agentforce Agents page showing Trail Guide">
+          <div class="caption">Agentforce Agents list in Setup — you should see Trail Guide here</div>
+        </div>
+        <ol start="4">
+          <li>Click <strong>Trail Guide</strong> in the agent list. It will open in the <strong>Agentforce Builder</strong> in a new tab.</li>
+        </ol>
+        <div class="screenshot">
+          <img src="https://assets.meshmesh.io/tenants/org_01KDY098Y468ZK9Q6DFDZXJBG6/task-assets/d7c03efa-85e3-48dc-ab81-181132b7affa/8bb4d10d-cd1a-4bdf-a5ef-f4cc037e9be9.png" alt="Agentforce Builder showing Trail Guide">
+          <div class="caption">Agentforce Builder — Trail Guide with Explorer panel on the left</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-header">
+        <div class="step-num">8</div>
+        <h3>Explore What's Already Configured</h3>
+        <button class="complete-btn" onclick="toggleStep(this)">Mark Done</button>
+      </div>
+      <div class="step-body">
+        <p>Take a minute to look around. In the <strong>Explorer</strong> panel (left side), expand the <strong>Subagents</strong> folder. Trail Guide has:</p>
+        <table>
+          <tr><th>Subagent</th><th>What It Does</th></tr>
+          <tr><td><strong>Customer Service</strong></td><td>Handles profile lookup, order history, case management, product returns</td></tr>
+          <tr><td><strong>Loyalty and Promotions</strong></td><td>Manages loyalty points, tier status, discounts, promo codes, proactive offers</td></tr>
+        </table>
+        <div class="callout warn">
+          <span class="callout-icon">⚠️</span>
+          <span><strong>What's missing?</strong> There's no Product Discovery subagent. If a customer asks "what jackets do you have?" — the agent has no way to answer. <strong>You're about to fix that.</strong></span>
+        </div>
+        <div class="callout info">
+          <span class="callout-icon">ℹ️</span>
+          <span><strong>Key concept:</strong> <strong>Subagents</strong> define what the agent can do. Each subagent has <strong>Actions</strong> — backend functions it can call (Apex code, Flows, or APIs). You add a subagent, and the agent handles the rest.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Unit 3: Build Product Discovery ── -->
+  <div class="section" id="unit3">
+    <div class="unit-header">
+      <div class="unit-num">3</div>
+      <div class="unit-title">Build: Add Product Discovery</div>
+      <div class="unit-time">18 – 33 min</div>
+    </div>
+    <p style="font-size:14.5px; color:#444; margin-bottom:24px; line-height:1.7;">
+      This is the core build. You'll add a pre-built Product Discovery subagent from the Asset Library so customers can find products using natural language.
+    </p>
+
+    <div class="step">
+      <div class="step-header">
+        <div class="step-num">9</div>
+        <h3>Add the Product Discovery Subagent</h3>
+        <button class="complete-btn" onclick="toggleStep(this)">Mark Done</button>
+      </div>
+      <div class="step-body">
+        <ol>
+          <li>In the Agentforce Builder, look at the <strong>Explorer</strong> panel (left side). Click the <strong>Add Resource</strong> button (near the top of the Explorer panel, next to the search box).</li>
+        </ol>
+        <div class="screenshot">
+          <img src="https://assets.meshmesh.io/tenants/org_01KDY098Y468ZK9Q6DFDZXJBG6/task-assets/d7c03efa-85e3-48dc-ab81-181132b7affa/67a7eee1-4e21-4681-857d-601506b94afe.png" alt="Add Resource menu showing options">
+          <div class="caption">Click "Add Resource" — you'll see a menu with several options</div>
+        </div>
+        <ol start="2">
+          <li>From the menu, select <strong>"Add from Asset Library"</strong>.</li>
+        </ol>
+        <div class="screenshot">
+          <img src="https://assets.meshmesh.io/tenants/org_01KDY098Y468ZK9Q6DFDZXJBG6/task-assets/d7c03efa-85e3-48dc-ab81-181132b7affa/3d9f70f1-42ca-4e6e-8d15-444aee1c4e94.png" alt="Asset Library dialog">
+          <div class="caption">The Asset Library dialog opens — showing all available subagents</div>
+        </div>
+        <ol start="3">
+          <li>In the search box at the top, type <strong>"Product Discovery"</strong>.</li>
+          <li>You'll see <strong>Product Discovery</strong> appear in the results. Click it to select it, then click <strong>Add</strong>.</li>
+        </ol>
+        <div class="screenshot">
+          <img src="https://assets.meshmesh.io/tenants/org_01KDY098Y468ZK9Q6DFDZXJBG6/task-assets/d7c03efa-85e3-48dc-ab81-181132b7affa/96245f30-da5c-4d2e-86d0-5b5549746b36.png" alt="Product Discovery found in search results">
+          <div class="caption">Search for "Product Discovery" — select it and add it to Trail Guide</div>
+        </div>
+        <div class="callout success">
+          <span class="callout-icon">✅</span>
+          <span><strong>Product Discovery</strong> should now appear in your Explorer panel under Subagents, alongside Customer Service and Loyalty and Promotions.</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-header">
+        <div class="step-num">10</div>
+        <h3>Review What's Included</h3>
+        <button class="complete-btn" onclick="toggleStep(this)">Mark Done</button>
+      </div>
+      <div class="step-body">
+        <ol>
+          <li>Click on <strong>Product Discovery</strong> in the Explorer tree to open it.</li>
+          <li>You'll see it comes with <strong>3 pre-wired actions</strong>:</li>
+        </ol>
+        <table>
+          <tr><th>Action</th><th>What It Does</th></tr>
+          <tr><td><strong>Search Product Catalog</strong></td><td>Searches products by keyword, category, and price — the core search engine</td></tr>
+          <tr><td><strong>Get Customer Profile</strong></td><td>Retrieves loyalty tier, points, and order history for context</td></tr>
+          <tr><td><strong>Get Personalized Recommendations</strong></td><td>Returns tailored product suggestions based on purchase history</td></tr>
+        </table>
+        <div class="callout info">
+          <span class="callout-icon">ℹ️</span>
+          <span><strong>No manual wiring needed!</strong> Because Product Discovery is a pre-built subagent, all actions are already connected. The Apex code behind each action is already deployed in your org.</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-header">
+        <div class="step-num">11</div>
+        <h3>Commit Your Changes</h3>
+        <button class="complete-btn" onclick="toggleStep(this)">Mark Done</button>
+      </div>
+      <div class="step-body">
+        <ol>
+          <li>Click <strong>Commit Version</strong> (top-right of the builder) to publish your changes.</li>
+          <li>Wait for the confirmation. Trail Guide now has Product Discovery capabilities.</li>
+        </ol>
+        <div class="callout warn">
+          <span class="callout-icon">⚠️</span>
+          <span>Committing can take 30–60 seconds. If it seems stuck, wait a moment — it may be processing in the background.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Unit 4: Test the Agent ── -->
+  <div class="section" id="unit4">
+    <div class="unit-header">
+      <div class="unit-num">4</div>
+      <div class="unit-title">Test the Agent — Live Product Queries</div>
+      <div class="unit-time">33 – 45 min</div>
+    </div>
+    <p style="font-size:14.5px; color:#444; margin-bottom:24px; line-height:1.7;">
+      Time to test. Open the Conversation Preview and try real product queries. Watch how the agent routes to Product Discovery and returns live catalog results.
+    </p>
+
+    <div class="step">
+      <div class="step-header">
+        <div class="step-num">12</div>
+        <h3>Open Conversation Preview</h3>
+        <button class="complete-btn" onclick="toggleStep(this)">Mark Done</button>
+      </div>
+      <div class="step-body">
+        <ol>
+          <li>In the Agentforce Builder, look for the <strong>Conversation Preview</strong> panel (usually on the right side or accessible via a chat icon).</li>
+          <li>If it's not visible, click the chat/preview button in the top toolbar to open it.</li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-header">
+        <div class="step-num">13</div>
+        <h3>Run Test Queries</h3>
+        <button class="complete-btn" onclick="toggleStep(this)">Mark Done</button>
+      </div>
+      <div class="step-body">
+        <p>Try each of these prompts in the Conversation Preview. After each one, observe the response.</p>
+        <div class="prompt-card">
+          <div class="prompt-label">Test Prompt 1 — Basic Search</div>
+          <p>What jackets do you have?</p>
+          <button class="copy-prompt" onclick="copyPrompt(this)">Copy</button>
+        </div>
+        <div class="callout success">
+          <span class="callout-icon">✅</span>
+          <span>Should return outerwear products like Cascade Hardshell, Alpine Fleece Pullover, Trail Rain Jacket</span>
+        </div>
+
+        <div class="prompt-card">
+          <div class="prompt-label">Test Prompt 2 — Price Filter</div>
+          <p>Show me hiking boots under $200</p>
+          <button class="copy-prompt" onclick="copyPrompt(this)">Copy</button>
+        </div>
+        <div class="callout success">
+          <span class="callout-icon">✅</span>
+          <span>Should filter footwear by price — Ridgeline Hiking Boot, Mesa Day Hiker, Summit Trail Runner</span>
+        </div>
+
+        <div class="prompt-card">
+          <div class="prompt-label">Test Prompt 3 — Specific Item</div>
+          <p>Do you have a GPS watch?</p>
+          <button class="copy-prompt" onclick="copyPrompt(this)">Copy</button>
+        </div>
+        <div class="callout success">
+          <span class="callout-icon">✅</span>
+          <span>Should find GPS Trail Watch and Solar Activity Tracker from the Electronics category</span>
+        </div>
+
+        <div class="prompt-card">
+          <div class="prompt-label">Test Prompt 4 — Personalized Recommendations</div>
+          <p>What would you recommend for me?</p>
+          <button class="copy-prompt" onclick="copyPrompt(this)">Copy</button>
+        </div>
+        <div class="callout success">
+          <span class="callout-icon">✅</span>
+          <span>Agent looks up the customer's profile, finds purchase history, and recommends products from complementary categories</span>
+        </div>
+
+        <div class="callout info">
+          <span class="callout-icon">ℹ️</span>
+          <span>Every result comes from the live NTO catalog — no hardcoded responses, no hallucination. The agent extracts keywords and filters from natural language, then queries real product data.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Unit 5: Add Products ── -->
+  <div class="section" id="unit5">
+    <div class="unit-header">
+      <div class="unit-num">5</div>
+      <div class="unit-title">Add Products &amp; Re-Search</div>
+      <div class="unit-time">45 – 55 min</div>
+    </div>
+    <p style="font-size:14.5px; color:#444; margin-bottom:24px; line-height:1.7;">
+      The agent searches <strong>live data</strong> — not a static index. Add a new product to the catalog and watch it appear in search results instantly.
+    </p>
+
+    <div class="step">
+      <div class="step-header">
+        <div class="step-num">14</div>
+        <h3>Create a New Product</h3>
+        <button class="complete-btn" onclick="toggleStep(this)">Mark Done</button>
+      </div>
+      <div class="step-body">
+        <ol>
+          <li>Click the <strong>App Launcher</strong> (9-dot grid) and search for <strong>"Products"</strong>.</li>
+          <li>Click <strong>New</strong> to create a product.</li>
+          <li>Fill in the details — get creative! Here's an example:</li>
+        </ol>
+        <table>
+          <tr><th>Field</th><th>Value</th></tr>
+          <tr><td>Product Name</td><td>Trailblazer Insulated Vest</td></tr>
+          <tr><td>Product Code</td><td>NTO-OUT-007</td></tr>
+          <tr><td>Product Family</td><td>Outerwear</td></tr>
+          <tr><td>Product Description</td><td>Lightweight, packable vest with PrimaLoft insulation. Perfect for layering on cool mornings.</td></tr>
+          <tr><td>Active</td><td>✅ Checked</td></tr>
+        </table>
+        <div class="callout tip">
+          <span class="callout-icon">💡</span>
+          <span><strong>Make it yours:</strong> Feel free to create any product you want — a solar-powered lantern, waterproof socks, a trail hammock. The more creative, the more fun the test!</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-header">
+        <div class="step-num">15</div>
+        <h3>Add a Standard Price</h3>
+        <button class="complete-btn" onclick="toggleStep(this)">Mark Done</button>
+      </div>
+      <div class="step-body">
+        <ol>
+          <li>On your new product record, scroll down to <strong>Standard Price</strong> (or Price Books related list).</li>
+          <li>Click <strong>Add Standard Price</strong> and enter a price (e.g., <strong>$149.00</strong>).</li>
+          <li>Ensure the price book entry is <strong>Active</strong>.</li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-header">
+        <div class="step-num">16</div>
+        <h3>Search for Your New Product</h3>
+        <button class="complete-btn" onclick="toggleStep(this)">Mark Done</button>
+      </div>
+      <div class="step-body">
+        <ol>
+          <li>Go back to the <strong>Agentforce Builder</strong> and open <strong>Conversation Preview</strong>.</li>
+          <li>Search for your new product:</li>
+        </ol>
+        <div class="prompt-card">
+          <div class="prompt-label">Test your new product</div>
+          <p>Do you have an insulated vest?</p>
+          <button class="copy-prompt" onclick="copyPrompt(this)">Copy</button>
+        </div>
+        <div class="callout success">
+          <span class="callout-icon">✅</span>
+          <span><strong>There it is!</strong> Your new product appears in the results — instantly. No reindexing, no cache clearing, no waiting. The agent queries the catalog in real time.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Unit 6: What You Built ── -->
+  <div class="section" id="unit6">
+    <div class="unit-header">
+      <div class="unit-num">6</div>
+      <div class="unit-title">The Full Purchase Journey</div>
+      <div class="unit-time">55 – 60 min</div>
+    </div>
+    <p style="font-size:14.5px; color:#444; margin-bottom:24px; line-height:1.7;">
+      Step back and see the big picture. Run a complete shopping session through the agent.
+    </p>
+
+    <div class="step">
+      <div class="step-header">
+        <div class="step-num">17</div>
+        <h3>Run the Full Journey</h3>
+        <button class="complete-btn" onclick="toggleStep(this)">Mark Done</button>
+      </div>
+      <div class="step-body">
+        <p>In Conversation Preview, walk through a complete shopping session:</p>
+        <div class="prompt-card">
+          <div class="prompt-label">1. Discovery</div>
+          <p>I'm planning a weekend hiking trip — what do I need?</p>
+          <button class="copy-prompt" onclick="copyPrompt(this)">Copy</button>
+        </div>
+        <div class="prompt-card">
+          <div class="prompt-label">2. Narrowing</div>
+          <p>Show me rain jackets under $200</p>
+          <button class="copy-prompt" onclick="copyPrompt(this)">Copy</button>
+        </div>
+        <div class="prompt-card">
+          <div class="prompt-label">3. Comparison</div>
+          <p>What's the difference between the Cascade Hardshell and the Trail Rain Jacket?</p>
+          <button class="copy-prompt" onclick="copyPrompt(this)">Copy</button>
+        </div>
+        <div class="prompt-card">
+          <div class="prompt-label">4. Cross-sell</div>
+          <p>What else goes well with the Trail Rain Jacket?</p>
+          <button class="copy-prompt" onclick="copyPrompt(this)">Copy</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-header">
+        <div class="step-num">18</div>
+        <h3>What You Built in 60 Minutes</h3>
+        <button class="complete-btn" onclick="toggleStep(this)">Mark Done</button>
+      </div>
+      <div class="step-body">
+        <table>
+          <tr><th>Achievement</th><th>Capability</th></tr>
+          <tr><td>Explored a pre-configured agent</td><td>Agentforce Builder</td></tr>
+          <tr><td>Added Product Discovery from the Asset Library</td><td>Live Data Search</td></tr>
+          <tr><td>Tested with real product queries</td><td>Natural Language Search</td></tr>
+          <tr><td>Personalized recommendations using purchase history</td><td>AI Personalization</td></tr>
+          <tr><td>Added new products and saw them instantly in search</td><td>Context Grounding</td></tr>
+          <tr><td>Ran the full purchase journey</td><td>Discovery → Conversion</td></tr>
+        </table>
+        <div class="callout success">
+          <span class="callout-icon">🏔️</span>
+          <span><strong>One agent. Real products. Real personalization. Real results.</strong> Every product, price, and recommendation came from your actual catalog — no hallucination, no hardcoded responses.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Resources ── -->
+  <div class="section" id="resources">
+    <div class="unit-header">
+      <div class="unit-num" style="background:#888">R</div>
+      <div class="unit-title">Resources &amp; Next Steps</div>
+    </div>
+    <table>
+      <tr><th>Resource</th><th>Link</th></tr>
+      <tr><td>Agentforce Trailhead</td><td><a href="https://trailhead.salesforce.com/content/learn/trails/build-agentforce-agents" target="_blank">Build Agentforce Agents Trail</a></td></tr>
+      <tr><td>Agent Builder Docs</td><td><a href="https://developer.salesforce.com/docs/einstein/genai/guide/agent-script.html" target="_blank">Agentforce Developer Guide</a></td></tr>
+      <tr><td>Salesforce Help</td><td><a href="https://help.salesforce.com" target="_blank">help.salesforce.com</a></td></tr>
+    </table>
+    <div class="callout info" style="margin-top:24px;">
+      <span class="callout-icon">📱</span>
+      <span>Scan the QR code on your table card to save this workshop guide and all resources.</span>
+    </div>
+  </div>
+
+</main>
+</div>
+
+<!-- ── Footer ── -->
+<div class="footer-bar">
+  <span>NTO Trail Guide Workshop · Dreamforce 2026</span>
+  <a href="https://trailhead.salesforce.com" target="_blank">Trailhead</a>
+  <a href="https://help.salesforce.com" target="_blank">Salesforce Help</a>
+  <span style="margin-left:auto;">Questions? Flag a facilitator.</span>
+</div>
+
+<script>
+  // ── Progress tracking ──
+  const STORAGE_KEY = 'nto-workshop-progress';
+
+  function loadProgress() {
+    try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || {}; } catch { return {}; }
+  }
+  function saveProgress(state) {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+  }
+
+  function updateProgressCounter() {
+    const btns = document.querySelectorAll('.complete-btn');
+    const done = document.querySelectorAll('.complete-btn.done').length;
+    document.getElementById('progress-text').textContent = `${done} / ${btns.length} steps`;
+  }
+
+  function toggleStep(btn) {
+    const stepEl = btn.closest('.step');
+    const stepId = stepEl.querySelector('h3').textContent.trim();
+    const state = loadProgress();
+    const isDone = btn.classList.toggle('done');
+    btn.textContent = isDone ? '✓ Done' : 'Mark Done';
+    stepEl.style.opacity = isDone ? '0.7' : '1';
+    state[stepId] = isDone;
+    saveProgress(state);
+    updateProgressCounter();
+    updateNavDots();
+  }
+
+  function resetProgress() {
+    if (!confirm('Reset all progress?')) return;
+    localStorage.removeItem(STORAGE_KEY);
+    document.querySelectorAll('.complete-btn').forEach(btn => {
+      btn.classList.remove('done');
+      btn.textContent = 'Mark Done';
+      btn.closest('.step').style.opacity = '1';
+    });
+    updateProgressCounter();
+    updateNavDots();
+  }
+
+  function restoreProgress() {
+    const state = loadProgress();
+    document.querySelectorAll('.step').forEach(stepEl => {
+      const stepId = stepEl.querySelector('h3').textContent.trim();
+      if (state[stepId]) {
+        const btn = stepEl.querySelector('.complete-btn');
+        btn.classList.add('done');
+        btn.textContent = '✓ Done';
+        stepEl.style.opacity = '0.7';
+      }
+    });
+    updateProgressCounter();
+  }
+
+  function updateNavDots() {
+    const sections = ['intro','unit0','unit1','unit2','unit3','unit4','unit5','unit6','resources'];
+    sections.forEach(id => {
+      const section = document.getElementById(id);
+      if (!section) return;
+      const steps = section.querySelectorAll('.step');
+      const allDone = steps.length > 0 && [...steps].every(s => s.querySelector('.complete-btn.done'));
+      const navLink = document.querySelector(`[data-section="${id}"]`);
+      if (navLink) {
+        const dot = navLink.querySelector('.step-dot');
+        if (allDone) { dot.style.background = '#2e6b3e'; navLink.classList.add('done'); }
+        else { dot.style.background = ''; navLink.classList.remove('done'); }
+      }
+    });
+  }
+
+  // ── Active nav on scroll ──
+  function updateActiveNav() {
+    const sections = document.querySelectorAll('.section');
+    let current = '';
+    sections.forEach(sec => {
+      if (window.scrollY >= sec.offsetTop - 100) current = sec.id;
+    });
+    document.querySelectorAll('.nav-link').forEach(a => {
+      a.classList.toggle('active', a.dataset.section === current);
+      const dot = a.querySelector('.step-dot');
+      if (a.dataset.section === current) dot.classList.add('active-dot');
+      else dot.classList.remove('active-dot');
+    });
+  }
+
+  // ── Copy buttons ──
+  function copyPrompt(btn) {
+    const text = btn.closest('.prompt-card').querySelector('p').textContent;
+    navigator.clipboard.writeText(text).then(() => {
+      btn.textContent = 'Copied!';
+      setTimeout(() => btn.textContent = 'Copy', 2000);
+    });
+  }
+
+  window.addEventListener('scroll', updateActiveNav, { passive: true });
+  restoreProgress();
+  updateActiveNav();
+</script>
+</body>
+</html>
