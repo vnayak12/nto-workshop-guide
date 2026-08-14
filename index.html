@@ -4,35 +4,37 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>NTO Trail Guide Workshop — Dreamforce 2026</title>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;700;800&display=swap" rel="stylesheet">
   <style>
     /* ── Reset & tokens ── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
-      --nto-green:   #2e6b3e;
-      --nto-green-d: #1e4a2a;
-      --nto-tan:     #f5f0e8;
-      --nto-orange:  #d4622a;
-      --sf-blue:     #0070d2;
-      --sf-blue-d:   #005fb2;
-      --text:        #1a1a1a;
-      --muted:       #555;
-      --border:      #ddd;
-      --sidebar-w:   280px;
-      --header-h:    56px;
+      --nto-primary:   #006c9c;
+      --nto-primary-d: #005276;
+      --nto-light:     #f0f7fa;
+      --nto-accent:    #6dccee;
+      --sf-blue:       #006c9c;
+      --sf-blue-d:     #005276;
+      --text:          #393939;
+      --muted:         #555;
+      --border:        #ddd;
+      --sidebar-w:     280px;
+      --header-h:      56px;
     }
-    body { font-family: "Salesforce Sans", "Helvetica Neue", Arial, sans-serif; color: var(--text); background: #fff; }
+    body { font-family: "Source Sans Pro", "Helvetica Neue", Arial, sans-serif; color: var(--text); background: #fff; }
 
     /* ── Top bar ── */
     header {
       position: fixed; top: 0; left: 0; right: 0; height: var(--header-h);
-      background: var(--nto-green); color: #fff;
+      background: var(--nto-primary); color: #fff;
       display: flex; align-items: center; padding: 0 24px;
       z-index: 100; gap: 16px;
       box-shadow: 0 2px 6px rgba(0,0,0,.2);
     }
-    header .logo { font-size: 20px; font-weight: 700; letter-spacing: .5px; }
-    header .logo span { color: #a8d5b5; }
-    header .subtitle { font-size: 13px; color: #c5e0cb; margin-left: auto; }
+    header .logo { font-size: 20px; font-weight: 700; letter-spacing: .5px; display: flex; align-items: center; gap: 10px; }
+    header .logo img { height: 28px; filter: brightness(0) invert(1); }
+    header .logo span { color: #9dd8f0; }
+    header .subtitle { font-size: 13px; color: #a8ddf0; margin-left: auto; }
     header .progress-pill {
       background: rgba(255,255,255,.15); border-radius: 20px;
       padding: 4px 14px; font-size: 13px; display: flex; align-items: center; gap: 8px;
@@ -50,7 +52,7 @@
     nav {
       width: var(--sidebar-w); flex-shrink: 0;
       position: fixed; top: var(--header-h); left: 0; bottom: 0;
-      overflow-y: auto; background: var(--nto-tan);
+      overflow-y: auto; background: var(--nto-light);
       border-right: 1px solid var(--border); padding: 20px 0;
     }
     nav .nav-section { margin-bottom: 4px; }
@@ -64,19 +66,15 @@
       text-decoration: none; border-left: 3px solid transparent;
       transition: background .15s, border-color .15s;
     }
-    nav a:hover { background: #e8e1d4; }
-    nav a.active { border-left-color: var(--nto-green); background: #e2f0e6; color: var(--nto-green-d); font-weight: 600; }
-    nav a.done .step-dot { background: var(--nto-green); }
+    nav a:hover { background: #daeef5; }
+    nav a.active { border-left-color: var(--nto-primary); background: #d6ecf5; color: var(--nto-primary-d); font-weight: 600; }
+    nav a.done .step-dot { background: var(--nto-primary); }
     nav .step-dot {
       width: 20px; height: 20px; border-radius: 50%;
       background: #ccc; display: flex; align-items: center; justify-content: center;
       font-size: 10px; font-weight: 700; color: #fff; flex-shrink: 0;
     }
-    nav .step-dot.active-dot { background: var(--nto-orange); }
-    nav .time-badge {
-      margin-left: auto; font-size: 10px; color: var(--muted);
-      background: #ddd6c8; padding: 1px 6px; border-radius: 10px;
-    }
+    nav .step-dot.active-dot { background: var(--nto-accent); }
 
     /* ── Main content ── */
     main {
@@ -87,18 +85,12 @@
 
     /* ── Hero ── */
     .hero {
-      background: linear-gradient(135deg, var(--nto-green) 0%, var(--nto-green-d) 100%);
+      background: linear-gradient(135deg, var(--nto-primary) 0%, var(--nto-primary-d) 100%);
       color: #fff; border-radius: 12px; padding: 40px 48px; margin-bottom: 48px;
     }
-    .hero .tag { font-size: 11px; letter-spacing: 1px; text-transform: uppercase; color: #a8d5b5; margin-bottom: 8px; }
+    .hero .tag { font-size: 11px; letter-spacing: 1px; text-transform: uppercase; color: #9dd8f0; margin-bottom: 8px; }
     .hero h1 { font-size: 28px; font-weight: 800; line-height: 1.25; margin-bottom: 12px; }
-    .hero p { font-size: 15px; color: #d4eeda; line-height: 1.6; max-width: 540px; }
-    .hero .stats {
-      display: flex; gap: 32px; margin-top: 28px;
-      border-top: 1px solid rgba(255,255,255,.2); padding-top: 24px;
-    }
-    .hero .stat .val { font-size: 28px; font-weight: 800; }
-    .hero .stat .lbl { font-size: 11px; color: #a8d5b5; text-transform: uppercase; letter-spacing: .5px; }
+    .hero p { font-size: 15px; color: #c5e8f5; line-height: 1.6; max-width: 540px; }
 
     /* ── Section headings ── */
     .unit-header {
@@ -108,16 +100,11 @@
     }
     .unit-num {
       width: 44px; height: 44px; border-radius: 50%;
-      background: var(--nto-green); color: #fff;
+      background: var(--nto-primary); color: #fff;
       display: flex; align-items: center; justify-content: center;
       font-size: 18px; font-weight: 800; flex-shrink: 0;
     }
     .unit-title { font-size: 22px; font-weight: 700; }
-    .unit-time {
-      margin-left: auto; font-size: 12px; color: var(--muted);
-      background: var(--nto-tan); padding: 4px 12px; border-radius: 20px;
-      border: 1px solid var(--border);
-    }
 
     /* ── Step cards ── */
     .step {
@@ -131,7 +118,7 @@
     }
     .step-num {
       width: 28px; height: 28px; border-radius: 50%;
-      background: var(--nto-orange); color: #fff;
+      background: var(--nto-accent); color: #fff;
       display: flex; align-items: center; justify-content: center;
       font-size: 13px; font-weight: 700; flex-shrink: 0;
     }
@@ -142,8 +129,8 @@
       padding: 4px 14px; font-size: 12px; cursor: pointer; color: var(--muted);
       transition: all .15s;
     }
-    .step-header .complete-btn:hover { border-color: var(--nto-green); color: var(--nto-green); }
-    .step-header .complete-btn.done { background: var(--nto-green); color: #fff; border-color: var(--nto-green); }
+    .step-header .complete-btn:hover { border-color: var(--nto-primary); color: var(--nto-primary); }
+    .step-header .complete-btn.done { background: var(--nto-primary); color: #fff; border-color: var(--nto-primary); }
     .step-body { padding: 20px 24px; }
     .step-body p { font-size: 14.5px; line-height: 1.7; margin-bottom: 12px; color: #333; }
     .step-body ol, .step-body ul { padding-left: 20px; margin-bottom: 12px; }
@@ -171,13 +158,13 @@
     .callout.tip    { background: #fffbe6; border-left: 4px solid #f0c040; }
     .callout.warn   { background: #fff3e0; border-left: 4px solid #e07b39; }
     .callout.info   { background: #e8f4fd; border-left: 4px solid var(--sf-blue); }
-    .callout.success{ background: #e8f5e9; border-left: 4px solid var(--nto-green); }
+    .callout.success{ background: #e0f4f8; border-left: 4px solid var(--nto-primary); }
 
     /* ── Prompt cards ── */
     .prompt-card {
       background: linear-gradient(135deg, #1e1e2e, #2a2a3e);
       border-radius: 8px; padding: 20px 24px; margin: 12px 0;
-      border-left: 4px solid var(--nto-orange);
+      border-left: 4px solid var(--nto-accent);
     }
     .prompt-card .prompt-label { font-size: 10px; color: #888; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 8px; }
     .prompt-card p { color: #e0e0f0; font-size: 14px; line-height: 1.6; font-style: italic; }
@@ -185,11 +172,11 @@
       margin-top: 12px; background: none; border: 1px solid rgba(255,255,255,.2);
       color: #aaa; border-radius: 4px; padding: 4px 12px; font-size: 11px; cursor: pointer;
     }
-    .prompt-card .copy-prompt:hover { border-color: var(--nto-orange); color: var(--nto-orange); }
+    .prompt-card .copy-prompt:hover { border-color: var(--nto-accent); color: var(--nto-accent); }
 
     /* ── Data table ── */
     table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 13.5px; }
-    th { background: var(--nto-tan); text-align: left; padding: 10px 14px; font-weight: 600; border-bottom: 2px solid var(--border); }
+    th { background: var(--nto-light); text-align: left; padding: 10px 14px; font-weight: 600; border-bottom: 2px solid var(--border); }
     td { padding: 10px 14px; border-bottom: 1px solid #eee; }
     tr:hover td { background: #fafafa; }
 
@@ -198,7 +185,7 @@
 
     /* ── Footer ── */
     .footer-bar {
-      background: var(--nto-tan); border-top: 1px solid var(--border);
+      background: var(--nto-light); border-top: 1px solid var(--border);
       padding: 32px 64px; margin-left: var(--sidebar-w);
       font-size: 13px; color: var(--muted);
       display: flex; gap: 32px; align-items: center;
@@ -218,7 +205,10 @@
 
 <!-- ── Header ── -->
 <header>
-  <div class="logo">NTO <span>Trail Guide</span></div>
+  <div class="logo">
+    <img src="https://www.northerntrailoutfitters.com/on/demandware.static/Sites-NTOSFRA-Site/-/default/dweee69f0a/images/logo.svg" alt="Northern Trail Outfitters">
+    <span>Trail Guide</span>
+  </div>
   <div class="subtitle">Dreamforce 2026 · Retail Industry Workshop</div>
   <div class="progress-pill">
     <span id="progress-text">0 / 0 steps</span>
@@ -237,34 +227,27 @@
     </a>
     <a href="#unit0" class="nav-link" data-section="unit0">
       <span class="step-dot">0</span> Getting Your Org Prepared
-      <span class="time-badge">0–5 min</span>
     </a>
   </div>
   <div class="nav-section">
     <div class="nav-section-title">Workshop Units</div>
     <a href="#unit1" class="nav-link" data-section="unit1">
       <span class="step-dot">1</span> Explore the Catalog
-      <span class="time-badge">5–10 min</span>
     </a>
     <a href="#unit2" class="nav-link" data-section="unit2">
       <span class="step-dot">2</span> Meet Trail Guide
-      <span class="time-badge">10–18 min</span>
     </a>
     <a href="#unit3" class="nav-link" data-section="unit3">
       <span class="step-dot">3</span> Build: Product Discovery
-      <span class="time-badge">18–33 min</span>
     </a>
     <a href="#unit4" class="nav-link" data-section="unit4">
       <span class="step-dot">4</span> Test the Agent
-      <span class="time-badge">33–45 min</span>
     </a>
     <a href="#unit5" class="nav-link" data-section="unit5">
       <span class="step-dot">5</span> Add Products & Re-Search
-      <span class="time-badge">45–55 min</span>
     </a>
     <a href="#unit6" class="nav-link" data-section="unit6">
       <span class="step-dot">6</span> What You Built
-      <span class="time-badge">55–60 min</span>
     </a>
   </div>
   <div class="nav-section">
@@ -282,13 +265,7 @@
   <div class="hero">
     <div class="tag">Dreamforce 2026 · Hands-On Workshop</div>
     <h1>Product Discovery<br>with Agentforce</h1>
-    <p>Build a Product Discovery agent that searches a real product catalog, delivers personalized recommendations, and drives the entire purchase journey — all in 60 minutes.</p>
-    <div class="stats">
-      <div class="stat"><div class="val">60</div><div class="lbl">Minutes</div></div>
-      <div class="stat"><div class="val">6</div><div class="lbl">Units</div></div>
-      <div class="stat"><div class="val">40</div><div class="lbl">Products</div></div>
-      <div class="stat"><div class="val">1</div><div class="lbl">Agent</div></div>
-    </div>
+    <p>Build a Product Discovery agent that searches a real product catalog, delivers personalized recommendations, and drives the entire purchase journey — all through natural conversation.</p>
   </div>
 
   <!-- ── Intro ── -->
@@ -344,7 +321,6 @@
     <div class="unit-header">
       <div class="unit-num" style="background:#888">0</div>
       <div class="unit-title">Getting Your Org Prepared</div>
-      <div class="unit-time">0 – 5 min</div>
     </div>
 
     <div class="step">
@@ -397,7 +373,6 @@
     <div class="unit-header">
       <div class="unit-num">1</div>
       <div class="unit-title">Explore the NTO Product Catalog</div>
-      <div class="unit-time">5 – 10 min</div>
     </div>
     <p style="font-size:14.5px; color:#444; margin-bottom:24px; line-height:1.7;">
       NTO sells outdoor gear across 9 categories. Let's see the 40 products that power the agent's product search.
@@ -456,7 +431,6 @@
     <div class="unit-header">
       <div class="unit-num">2</div>
       <div class="unit-title">Meet Trail Guide Agent</div>
-      <div class="unit-time">10 – 18 min</div>
     </div>
     <p style="font-size:14.5px; color:#444; margin-bottom:24px; line-height:1.7;">
       Trail Guide is NTO's AI shopping assistant. It's pre-configured with two subagents (Customer Service and Loyalty) — but it <strong>can't search products yet</strong>. That's what you'll build.
@@ -518,7 +492,6 @@
     <div class="unit-header">
       <div class="unit-num">3</div>
       <div class="unit-title">Build: Add Product Discovery</div>
-      <div class="unit-time">18 – 33 min</div>
     </div>
     <p style="font-size:14.5px; color:#444; margin-bottom:24px; line-height:1.7;">
       This is the core build. You'll add a pre-built Product Discovery subagent from the Asset Library so customers can find products using natural language.
@@ -608,7 +581,6 @@
     <div class="unit-header">
       <div class="unit-num">4</div>
       <div class="unit-title">Test the Agent — Live Product Queries</div>
-      <div class="unit-time">33 – 45 min</div>
     </div>
     <p style="font-size:14.5px; color:#444; margin-bottom:24px; line-height:1.7;">
       Time to test. Open the Conversation Preview and try real product queries. Watch how the agent routes to Product Discovery and returns live catalog results.
@@ -689,7 +661,6 @@
     <div class="unit-header">
       <div class="unit-num">5</div>
       <div class="unit-title">Add Products &amp; Re-Search</div>
-      <div class="unit-time">45 – 55 min</div>
     </div>
     <p style="font-size:14.5px; color:#444; margin-bottom:24px; line-height:1.7;">
       The agent searches <strong>live data</strong> — not a static index. Add a new product to the catalog and watch it appear in search results instantly.
@@ -766,7 +737,6 @@
     <div class="unit-header">
       <div class="unit-num">6</div>
       <div class="unit-title">The Full Purchase Journey</div>
-      <div class="unit-time">55 – 60 min</div>
     </div>
     <p style="font-size:14.5px; color:#444; margin-bottom:24px; line-height:1.7;">
       Step back and see the big picture. Run a complete shopping session through the agent.
@@ -806,7 +776,7 @@
     <div class="step">
       <div class="step-header">
         <div class="step-num">18</div>
-        <h3>What You Built in 60 Minutes</h3>
+        <h3>What You Built</h3>
         <button class="complete-btn" onclick="toggleStep(this)">Mark Done</button>
       </div>
       <div class="step-body">
@@ -839,10 +809,6 @@
       <tr><td>Agent Builder Docs</td><td><a href="https://developer.salesforce.com/docs/einstein/genai/guide/agent-script.html" target="_blank">Agentforce Developer Guide</a></td></tr>
       <tr><td>Salesforce Help</td><td><a href="https://help.salesforce.com" target="_blank">help.salesforce.com</a></td></tr>
     </table>
-    <div class="callout info" style="margin-top:24px;">
-      <span class="callout-icon">📱</span>
-      <span>Scan the QR code on your table card to save this workshop guide and all resources.</span>
-    </div>
   </div>
 
 </main>
@@ -922,7 +888,7 @@
       const navLink = document.querySelector(`[data-section="${id}"]`);
       if (navLink) {
         const dot = navLink.querySelector('.step-dot');
-        if (allDone) { dot.style.background = '#2e6b3e'; navLink.classList.add('done'); }
+        if (allDone) { dot.style.background = '#006c9c'; navLink.classList.add('done'); }
         else { dot.style.background = ''; navLink.classList.remove('done'); }
       }
     });
