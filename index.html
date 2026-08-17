@@ -46,7 +46,7 @@
     header .progress-pill button:hover { background: rgba(255,255,255,.1); }
 
     /* ── Layout ── */
-    .layout { display: flex; padding-top: var(--header-h); min-height: 100vh; }
+    .layout { display: flex; padding-top: var(--header-h); min-height: 100vh; overflow-x: hidden; }
 
     /* ── Sidebar ── */
     nav {
@@ -80,7 +80,8 @@
     main {
       margin-left: var(--sidebar-w);
       padding: 48px 64px 120px;
-      max-width: 860px; flex: 1;
+      max-width: 900px; flex: 1;
+      overflow-x: hidden;
     }
 
     /* ── Hero ── */
@@ -196,9 +197,15 @@
     .footer-bar a:hover { text-decoration: underline; }
 
     /* ── Responsive ── */
+    @media (max-width: 1100px) and (min-width: 901px) {
+      :root { --sidebar-w: 220px; }
+      nav a { padding: 8px 14px; font-size: 13px; }
+      main { padding: 40px 36px 100px; }
+      .footer-bar { padding: 24px 36px; }
+    }
     @media (max-width: 900px) {
       nav { display: none; }
-      main { margin-left: 0; padding: 32px 20px 80px; }
+      main { margin-left: 0; padding: 32px 20px 80px; max-width: 100%; }
       .footer-bar { margin-left: 0; padding: 24px 20px; }
     }
   </style>
@@ -477,7 +484,7 @@
           <li>Under <strong>Agentforce Studio</strong>, click <strong>Agents</strong> (or <strong>Agentforce Agents</strong>).</li>
         </ol>
         <div class="screenshot">
-          <img src="https://assets.meshmesh.io/tenants/org_01KDY098Y468ZK9Q6DFDZXJBG6/task-assets/d7c03efa-85e3-48dc-ab81-181132b7affa/7809eccd-d345-4d29-b806-4f5aa022ac50.png" alt="Setup Agentforce Agents page showing Trail Guide">
+          <img src="https://assets.meshmesh.io/tenants/org_01KDY098Y468ZK9Q6DFDZXJBG6/task-assets/1d37d433-4a7a-4534-8159-ba9ea2e2b153/432033f9-2b85-4082-8265-aa3580d7e714.png" alt="Setup Agentforce Agents page showing Trail Guide">
           <div class="caption">Agentforce Agents list in Setup — you should see Trail Guide here</div>
         </div>
         <ol start="4">
