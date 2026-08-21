@@ -215,7 +215,7 @@
 <!-- ── Header ── -->
 <header>
   <div class="logo">
-    <img src="https://www.northerntrailoutfitters.com/on/demandware.static/Sites-NTOSFRA-Site/-/default/dweee69f0a/images/logo.svg" alt="Northern Trail Outfitters">
+    <img src="img/nto-logo.svg" alt="Northern Trail Outfitters">
     <span>Trail Guide</span>
   </div>
   <div class="subtitle">Dreamforce 2026 · Retail Industry Workshop</div>
@@ -291,11 +291,11 @@
         <button class="complete-btn" onclick="toggleStep(this)">Mark Done</button>
       </div>
       <div class="step-body">
-        <p>Northern Trail Outfitters (NTO) sells outdoor gear across 9 product categories — from outerwear and footwear to camping and electronics. In this workshop, you'll extend <strong>Trail Guide</strong>, NTO's AI shopping assistant, by adding a <strong>Product Discovery</strong> capability so customers can search the catalog, get personalized recommendations, and explore products through natural conversation.</p>
+        <p>Northern Trail Outfitters (NTO) sells outdoor gear across 11 product categories — from outerwear and footwear to camping and electronics. In this workshop, you'll extend <strong>Trail Guide</strong>, NTO's AI shopping assistant, by adding a <strong>Product Discovery</strong> capability so customers can search the catalog, get personalized recommendations, and explore products through natural conversation.</p>
         <table>
           <tr><th>Unit</th><th>What You'll Do</th><th>Time</th></tr>
           <tr><td>0</td><td>Get your org ready</td><td>~5 min</td></tr>
-          <tr><td>1</td><td>Explore the NTO product catalog (40 products, 9 categories)</td><td>~5 min</td></tr>
+          <tr><td>1</td><td>Explore the NTO product catalog (50 products, 11 categories)</td><td>~5 min</td></tr>
           <tr><td>2</td><td>Open Trail Guide in Agentforce Builder and explore what's pre-configured</td><td>~8 min</td></tr>
           <tr><td>3</td><td>Add the Product Discovery subagent from the Asset Library</td><td>~15 min</td></tr>
           <tr><td>4</td><td>Test the agent with real product queries</td><td>~12 min</td></tr>
@@ -395,10 +395,8 @@
           <li>Click the login link from your email.</li>
           <li>You'll land on the NTO org home page. Confirm you see <strong>"Northern Trail Outfitters"</strong> in the org.</li>
         </ol>
-        <div class="screenshot">
-          <img src="https://assets.meshmesh.io/tenants/org_01KDY098Y468ZK9Q6DFDZXJBG6/task-assets/d7c03efa-85e3-48dc-ab81-181132b7affa/0d1099dc-348f-421c-9fe9-0d5a42d96a65.png" alt="Salesforce org home page after login">
-          <div class="caption">Your org home page after logging in</div>
-        </div>
+        <!-- TODO: add a real screenshot of the NTO org Home page here (img/org-home.png).
+             The previous image showed an empty Products list, not the Home page. -->
         <div class="callout tip">
           <span class="callout-icon">💡</span>
           <span>If the login link doesn't work, ask a facilitator for help.</span>
@@ -414,7 +412,7 @@
       <div class="unit-title">Explore the NTO Product Catalog</div>
     </div>
     <p style="font-size:14.5px; color:#444; margin-bottom:24px; line-height:1.7;">
-      NTO sells outdoor gear across 9 categories. Let's see the 40 products that power the agent's product search.
+      NTO sells outdoor gear across 11 categories. Let's see the 50 products that power the agent's product search.
     </p>
 
     <div class="step">
@@ -429,7 +427,7 @@
           <li>Type <strong>"Products"</strong> in the search box and click <strong>Products</strong>.</li>
         </ol>
         <div class="screenshot">
-          <img src="https://assets.meshmesh.io/tenants/org_01KDY098Y468ZK9Q6DFDZXJBG6/task-assets/d7c03efa-85e3-48dc-ab81-181132b7affa/f0a796ed-1ac3-4a12-b114-d8c7ec228b91.png" alt="Products list showing Recently Viewed">
+          <img src="img/products-recently-viewed.png" alt="Products list showing Recently Viewed">
           <div class="caption">Products list — initially shows "Recently Viewed" which may be empty</div>
         </div>
       </div>
@@ -447,15 +445,15 @@
           <li>Select <strong>"All Products"</strong> from the dropdown.</li>
         </ol>
         <div class="screenshot">
-          <img src="https://assets.meshmesh.io/tenants/org_01KDY098Y468ZK9Q6DFDZXJBG6/task-assets/d7c03efa-85e3-48dc-ab81-181132b7affa/90fff536-8725-48c6-b9b1-9b26a46b14b8.png" alt="List view dropdown showing All Products option">
+          <img src="img/products-listview-dropdown.png" alt="List view dropdown showing All Products option">
           <div class="caption">Click the dropdown and select "All Products"</div>
         </div>
         <ol start="3">
-          <li>You should now see <strong>40 products</strong> across 9 categories.</li>
+          <li>You should now see <strong>50 products</strong> across 11 categories.</li>
         </ol>
         <div class="screenshot">
-          <img src="https://assets.meshmesh.io/tenants/org_01KDY098Y468ZK9Q6DFDZXJBG6/task-assets/d7c03efa-85e3-48dc-ab81-181132b7affa/6739427d-aeeb-48f0-958b-e563db29fe53.png" alt="All Products list view showing 40 products">
-          <div class="caption">All Products view — 40 products across Outerwear, Footwear, Apparel, Accessories, Packs, Camping, Electronics, Nutrition, Cycling</div>
+          <img src="img/products-all.png" alt="All Products list view">
+          <div class="caption">All Products view — 50 products across Outerwear, Footwear, Apparel, Accessories, Packs, Camping, Electronics, Nutrition, Cycling, Kids, and Sustainability</div>
         </div>
         <div class="callout info">
           <span class="callout-icon">ℹ️</span>
@@ -488,14 +486,14 @@
           <li>Under <strong>Agentforce Studio</strong>, click <strong>Agents</strong> (or <strong>Agentforce Agents</strong>).</li>
         </ol>
         <div class="screenshot">
-          <img src="https://assets.meshmesh.io/tenants/org_01KDY098Y468ZK9Q6DFDZXJBG6/task-assets/1d37d433-4a7a-4534-8159-ba9ea2e2b153/432033f9-2b85-4082-8265-aa3580d7e714.png" alt="Setup Agentforce Agents page showing Trail Guide">
+          <img src="img/setup-agents.png" alt="Setup Agentforce Agents page showing Trail Guide">
           <div class="caption">Agentforce Agents list in Setup — you should see Trail Guide here</div>
         </div>
         <ol start="4">
           <li>Click <strong>Trail Guide</strong> in the agent list. It will open in the <strong>Agentforce Builder</strong> in a new tab.</li>
         </ol>
         <div class="screenshot">
-          <img src="https://assets.meshmesh.io/tenants/org_01KDY098Y468ZK9Q6DFDZXJBG6/task-assets/d7c03efa-85e3-48dc-ab81-181132b7affa/8bb4d10d-cd1a-4bdf-a5ef-f4cc037e9be9.png" alt="Agentforce Builder showing Trail Guide">
+          <img src="img/builder-trail-guide.png" alt="Agentforce Builder showing Trail Guide">
           <div class="caption">Agentforce Builder — Trail Guide with Explorer panel on the left</div>
         </div>
       </div>
@@ -547,14 +545,14 @@
           <li>In the Agentforce Builder, look at the <strong>Explorer</strong> panel (left side). Click the <strong>Add Resource</strong> button (near the top of the Explorer panel, next to the search box).</li>
         </ol>
         <div class="screenshot">
-          <img src="https://assets.meshmesh.io/tenants/org_01KDY098Y468ZK9Q6DFDZXJBG6/task-assets/d7c03efa-85e3-48dc-ab81-181132b7affa/67a7eee1-4e21-4681-857d-601506b94afe.png" alt="Add Resource menu showing options">
+          <img src="img/builder-add-resource.png" alt="Add Resource menu showing options">
           <div class="caption">Click "Add Resource" — you'll see a menu with several options</div>
         </div>
         <ol start="2">
           <li>From the menu, select <strong>"Add from Asset Library"</strong>.</li>
         </ol>
         <div class="screenshot">
-          <img src="https://assets.meshmesh.io/tenants/org_01KDY098Y468ZK9Q6DFDZXJBG6/task-assets/d7c03efa-85e3-48dc-ab81-181132b7affa/3d9f70f1-42ca-4e6e-8d15-444aee1c4e94.png" alt="Asset Library dialog">
+          <img src="img/asset-library-all.png" alt="Asset Library dialog">
           <div class="caption">The Asset Library dialog opens — showing all available subagents</div>
         </div>
         <ol start="3">
@@ -562,7 +560,7 @@
           <li>You'll see <strong>Product Discovery</strong> appear in the results. Click it to select it, then click <strong>Add</strong>.</li>
         </ol>
         <div class="screenshot">
-          <img src="https://assets.meshmesh.io/tenants/org_01KDY098Y468ZK9Q6DFDZXJBG6/task-assets/d7c03efa-85e3-48dc-ab81-181132b7affa/96245f30-da5c-4d2e-86d0-5b5549746b36.png" alt="Product Discovery found in search results">
+          <img src="img/asset-library-product-discovery.png" alt="Product Discovery found in search results">
           <div class="caption">Search for "Product Discovery" — select it and add it to Trail Guide</div>
         </div>
         <div class="callout success">
@@ -893,7 +891,7 @@
         </div>
         <div class="callout expect">
           <span class="callout-icon">✅</span>
-          <span><strong>What to expect:</strong> Loyalty queries return your points balance, tier (Bronze/Silver/Gold/Trailblazer), and available discounts. Support case queries show open case details including status and subject.</span>
+          <span><strong>What to expect:</strong> Loyalty queries return your points balance, tier (Member/Adventurer/Explorer/Summit), and available discounts. Support case queries show open case details including status and subject.</span>
         </div>
 
         <p style="font-weight:700; margin:18px 0 8px; color:var(--nto-primary);">⭐ Feedback &amp; Reviews</p>
@@ -904,7 +902,7 @@
         </div>
         <div class="prompt-card">
           <div class="prompt-label">Submit Review</div>
-          <p>I want to leave a 5-star review for the Alpine Explorer Jacket — it kept me warm on a freezing ridge hike!</p>
+          <p>I want to leave a 5-star review for the Cascade Hardshell Jacket — it kept me warm on a freezing ridge hike!</p>
           <button class="copy-prompt" onclick="copyPrompt(this)">Copy</button>
         </div>
         <div class="callout expect">
@@ -988,7 +986,7 @@
 
         <div class="prompt-card">
           <div class="prompt-label">Step 3 — Wishlist</div>
-          <p>Save the Alpine Explorer Jacket to my wishlist</p>
+          <p>Save the Cascade Hardshell Jacket to my wishlist</p>
           <button class="copy-prompt" onclick="copyPrompt(this)">Copy</button>
         </div>
         <div class="callout expect">
