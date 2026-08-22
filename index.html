@@ -299,7 +299,7 @@
           <tr><td>2</td><td>Open Trail Guide in Agentforce Builder and explore what's pre-configured</td><td>~8 min</td></tr>
           <tr><td>3</td><td>Add the Product Discovery subagent from the Asset Library</td><td>~15 min</td></tr>
           <tr><td>4</td><td>Test the agent with real product queries</td><td>~12 min</td></tr>
-          <tr><td>5</td><td>Add a new product and see it appear in search results instantly</td><td>~10 min</td></tr>
+          <tr><td>5</td><td>Add a new product and see it show up in search results right away</td><td>~10 min</td></tr>
           <tr><td>6</td><td>Explore all 11 topics, run a multi-topic conversation, and recap</td><td>~10 min</td></tr>
         </table>
       </div>
@@ -411,7 +411,7 @@
       <div class="unit-title">Explore the NTO Product Catalog</div>
     </div>
     <p style="font-size:14.5px; color:#444; margin-bottom:24px; line-height:1.7;">
-      NTO sells outdoor gear across 11 categories. Let's see the 50 products that power the agent's product search.
+      NTO sells outdoor gear across 11 categories. These are the 50 products the agent searches when a customer asks about gear.
     </p>
 
     <div class="step">
@@ -588,7 +588,7 @@
         </table>
         <div class="callout info">
           <span class="callout-icon">ℹ️</span>
-          <span><strong>No manual wiring needed!</strong> Because Product Discovery is a pre-built subagent, all actions are already connected. The Apex code behind each action is already deployed in your org.</span>
+          <span>You don't have to wire anything up. Because Product Discovery is a pre-built subagent, its actions are already connected, and the Apex code behind each one is already deployed in your org.</span>
         </div>
       </div>
     </div>
@@ -699,7 +699,7 @@
       <div class="unit-title">Add Products &amp; Re-Search</div>
     </div>
     <p style="font-size:14.5px; color:#444; margin-bottom:24px; line-height:1.7;">
-      The agent searches <strong>live data</strong> — not a static index. Add a new product to the catalog and watch it appear in search results instantly.
+      The agent searches <strong>live data</strong>, not a static index. Add a new product to the catalog and it turns up in search results right away.
     </p>
 
     <div class="step">
@@ -712,7 +712,7 @@
         <ol>
           <li>Click the <strong>App Launcher</strong> (9-dot grid) and search for <strong>"Products"</strong>.</li>
           <li>Click <strong>New</strong> to create a product.</li>
-          <li>Fill in the details — get creative! Here's an example:</li>
+          <li>Fill in the details. Here's an example to start from:</li>
         </ol>
         <table>
           <tr><th>Field</th><th>Value</th></tr>
@@ -724,7 +724,7 @@
         </table>
         <div class="callout tip">
           <span class="callout-icon">💡</span>
-          <span><strong>Make it yours:</strong> Feel free to create any product you want — a solar-powered lantern, waterproof socks, a trail hammock. The more creative, the more fun the test!</span>
+          <span><strong>Make it yours:</strong> use any product you like — a solar-powered lantern, waterproof socks, a trail hammock. Something distinctive makes it easier to spot in the search results later.</span>
         </div>
       </div>
     </div>
@@ -785,9 +785,9 @@
         <button class="complete-btn" onclick="toggleStep(this)">Mark Done</button>
       </div>
       <div class="step-body">
-        <p>In Conversation Preview, try prompts from each topic area. Watch how the agent routes to the right capability automatically.</p>
+        <p>In Conversation Preview, try prompts from each topic area. The agent figures out which topic each one belongs to on its own.</p>
 
-        <p style="font-weight:700; margin:18px 0 8px; color:var(--nto-primary);">🛍️ Product Discovery (you built this!)</p>
+        <p style="font-weight:700; margin:18px 0 8px; color:var(--nto-primary);">🛍️ Product Discovery (the one you built)</p>
         <div class="prompt-card">
           <div class="prompt-label">Product Search</div>
           <p>I'm planning a weekend hiking trip — what do I need?</p>
@@ -933,7 +933,7 @@
         </div>
         <div class="callout expect">
           <span class="callout-icon">✅</span>
-          <span><strong>What to expect:</strong> The agent politely declines and redirects you to NTO-related topics it can help with — no hallucinated answers for things outside its scope.</span>
+          <span><strong>What to expect:</strong> The agent declines and points you back to the NTO topics it can help with, rather than answering something outside its scope.</span>
         </div>
 
         <p style="font-weight:700; margin:18px 0 8px; color:var(--nto-primary);">❓ Ambiguous Question (guardrail)</p>
@@ -949,7 +949,7 @@
 
         <div class="callout info">
           <span class="callout-icon">ℹ️</span>
-          <span>Every response comes from <strong>live data</strong> — real products, real orders, real Knowledge articles, real store locations. No hardcoded responses. The agent automatically routes each question to the right topic and action. The guardrail topics ensure the agent stays focused and asks for clarity when needed.</span>
+          <span>Every response comes from <strong>live data</strong> — actual products, orders, Knowledge articles, and store locations, not canned text. The agent routes each question to the right topic and action, and the two guardrail topics keep it focused and ask for detail when a request is vague.</span>
         </div>
       </div>
     </div>
@@ -961,7 +961,7 @@
         <button class="complete-btn" onclick="toggleStep(this)">Mark Done</button>
       </div>
       <div class="step-body">
-        <p>Now try a full customer journey — one conversation that moves across several topics. Copy each prompt in order and watch the agent switch between them on its own.</p>
+        <p>Now try a full customer journey — one conversation that moves across several topics. Copy each prompt in order; the agent handles the switch between topics without any prompting from you.</p>
 
         <div class="prompt-card">
           <div class="prompt-label">Step 1 — Product Search</div>
