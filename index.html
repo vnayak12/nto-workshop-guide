@@ -274,7 +274,7 @@
   <div class="hero">
     <div class="tag">Dreamforce 2026 · Hands-On Workshop</div>
     <h1>Product Discovery<br>with Agentforce</h1>
-    <p>Build a Product Discovery topic for NTO's customer agent, then explore the other 10 topics already wired up — product search, FAQs, order tracking, wishlists, store locator, loyalty, customer service, reviews, marketing offers, and guardrails.</p>
+    <p>Build a Product Discovery topic for NTO's customer agent, then explore the other 10 topics already wired up: product search, FAQs, order tracking, wishlists, store locator, loyalty, customer service, reviews, marketing offers, and guardrails.</p>
   </div>
 
   <!-- ── Intro ── -->
@@ -291,7 +291,7 @@
         <button class="complete-btn" onclick="toggleStep(this)">Mark Done</button>
       </div>
       <div class="step-body">
-        <p>Northern Trail Outfitters (NTO) sells outdoor gear across 11 product categories — from outerwear and footwear to camping and electronics. In this workshop, you'll extend <strong>Trail Guide</strong>, NTO's AI shopping assistant, by adding a <strong>Product Discovery</strong> capability so customers can search the catalog, get personalized recommendations, and explore products through natural conversation.</p>
+        <p>Northern Trail Outfitters (NTO) sells outdoor gear across 11 product categories, from outerwear and footwear to camping and electronics. In this workshop, you'll extend <strong>Trail Guide</strong>, NTO's AI shopping assistant, by adding a <strong>Product Discovery</strong> capability so customers can search the catalog, get personalized recommendations, and explore products through natural conversation.</p>
         <table>
           <tr><th>Unit</th><th>What You'll Do</th><th>Time</th></tr>
           <tr><td>0</td><td>Get your org ready</td><td>~5 min</td></tr>
@@ -331,7 +331,7 @@
         <button class="complete-btn" onclick="toggleStep(this)">Mark Done</button>
       </div>
       <div class="step-body">
-        <p>Trail Guide is a <strong>customer super agent</strong> — one agent that handles many jobs, not a single-purpose bot. Before you start building, here's what it covers across its <strong>11 topics</strong>:</p>
+        <p>Trail Guide is a <strong>customer super agent</strong>: one agent that handles many jobs, not a single-purpose bot. Before you start building, here's what it covers across its <strong>11 topics</strong>:</p>
         <table>
           <tr><th>Topic</th><th>What It Does</th><th>Data Source</th></tr>
           <tr><td>🛍️ Product Discovery</td><td>Search the catalog, filter by price, get personalized picks</td><td>Product2 records</td></tr>
@@ -456,7 +456,7 @@
         </div>
         <div class="callout info">
           <span class="callout-icon">ℹ️</span>
-          <span>This is the real data your agent will search. Every product has a name, description, category, and price. When customers ask "show me jackets under $200" — the agent queries this catalog live.</span>
+          <span>This is the real data your agent will search. Every product has a name, description, category, and price. When customers ask "show me jackets under $200," the agent queries this catalog live.</span>
         </div>
       </div>
     </div>
@@ -469,7 +469,7 @@
       <div class="unit-title">Meet Trail Guide Agent</div>
     </div>
     <p style="font-size:14.5px; color:#444; margin-bottom:24px; line-height:1.7;">
-      Trail Guide is NTO's AI shopping assistant. It's pre-configured with two subagents (Customer Service and Loyalty) — but it <strong>can't search products yet</strong>. That's what you'll build.
+      Trail Guide is NTO's AI shopping assistant. It's pre-configured with two subagents (Customer Service and Loyalty), but it <strong>can't search products yet</strong>. That's what you'll build.
     </p>
 
     <div class="step">
@@ -513,11 +513,11 @@
         </table>
         <div class="callout warn">
           <span class="callout-icon">⚠️</span>
-          <span><strong>What's missing?</strong> There's no Product Discovery subagent. If a customer asks "what jackets do you have?" — the agent has no way to answer. <strong>You're about to fix that.</strong></span>
+          <span><strong>What's missing?</strong> There's no Product Discovery subagent. If a customer asks "what jackets do you have?", the agent has no way to answer. <strong>You're about to fix that.</strong></span>
         </div>
         <div class="callout info">
           <span class="callout-icon">ℹ️</span>
-          <span><strong>Key concept:</strong> <strong>Subagents</strong> define what the agent can do. Each subagent has <strong>Actions</strong> — backend functions it can call (Apex code, Flows, or APIs). You add a subagent, and the agent handles the rest.</span>
+          <span><strong>Key concept:</strong> <strong>Subagents</strong> define what the agent can do. Each subagent has <strong>Actions</strong>, backend functions it can call (Apex code, Flows, or APIs). You add a subagent, and the agent handles the rest.</span>
         </div>
       </div>
     </div>
@@ -606,7 +606,7 @@
         </ol>
         <div class="callout warn">
           <span class="callout-icon">⚠️</span>
-          <span>Committing can take 30–60 seconds. If it seems stuck, wait a moment — it may be processing in the background.</span>
+          <span>Committing can take 30–60 seconds. If it seems stuck, wait a moment; it may be processing in the background.</span>
         </div>
       </div>
     </div>
@@ -661,7 +661,7 @@
         </div>
         <div class="callout success">
           <span class="callout-icon">✅</span>
-          <span>Should filter footwear by price — Ridgeline Hiking Boot, Mesa Day Hiker, Summit Trail Runner</span>
+          <span>Should filter footwear by price: Ridgeline Hiking Boot, Mesa Day Hiker, Summit Trail Runner</span>
         </div>
 
         <div class="prompt-card">
@@ -686,7 +686,7 @@
 
         <div class="callout info">
           <span class="callout-icon">ℹ️</span>
-          <span>Every result comes from the live NTO catalog. The agent pulls keywords and filters out of the question, then queries the real product data — nothing here is hardcoded.</span>
+          <span>Every result comes from the live NTO catalog. The agent pulls keywords and filters out of the question, then queries the real product data. Nothing here is hardcoded.</span>
         </div>
       </div>
     </div>
@@ -724,7 +724,7 @@
         </table>
         <div class="callout tip">
           <span class="callout-icon">💡</span>
-          <span><strong>Make it yours:</strong> use any product you like — a solar-powered lantern, waterproof socks, a trail hammock. Something distinctive makes it easier to spot in the search results later.</span>
+          <span><strong>Make it yours:</strong> use any product you like, such as a solar-powered lantern, waterproof socks, or a trail hammock. Something distinctive makes it easier to spot in the search results later.</span>
         </div>
       </div>
     </div>
@@ -762,7 +762,7 @@
         </div>
         <div class="callout success">
           <span class="callout-icon">✅</span>
-          <span><strong>There it is.</strong> The product you just created shows up in the results right away — no reindexing or cache to clear, because the agent reads the catalog directly.</span>
+          <span><strong>There it is.</strong> The product you just created shows up in the results right away, with no reindexing or cache to clear, because the agent reads the catalog directly.</span>
         </div>
       </div>
     </div>
@@ -775,7 +775,7 @@
       <div class="unit-title">Explore the Full Agent</div>
     </div>
     <p style="font-size:14.5px; color:#444; margin-bottom:24px; line-height:1.7;">
-      Product Discovery is just one of Trail Guide's 11 topics. Try prompts across the rest too — FAQs, order tracking, wishlist, store locator, loyalty, customer service, product reviews, marketing offers, and the guardrails that keep it on topic.
+      Product Discovery is just one of Trail Guide's 11 topics. Try prompts across the rest too: FAQs, order tracking, wishlist, store locator, loyalty, customer service, product reviews, marketing offers, and the guardrails that keep it on topic.
     </p>
 
     <div class="step">
@@ -826,7 +826,7 @@
         </div>
         <div class="callout expect">
           <span class="callout-icon">✅</span>
-          <span><strong>What to expect:</strong> The agent searches Knowledge articles and returns detailed answers from published articles — like the Gear Repair guide, warranty terms, or gift card policy details (denominations, expiration, refund rules).</span>
+          <span><strong>What to expect:</strong> The agent searches Knowledge articles and returns detailed answers from published articles like the Gear Repair guide, warranty terms, or gift card policy details (denominations, expiration, refund rules).</span>
         </div>
 
         <p style="font-weight:700; margin:18px 0 8px; color:var(--nto-primary);">📦 Order Status &amp; Tracking</p>
@@ -858,7 +858,7 @@
         </div>
         <div class="callout expect">
           <span class="callout-icon">✅</span>
-          <span><strong>What to expect:</strong> The agent manages saved items — viewing shows products with prices, adding confirms the product was found and saved. It asks for your email to identify your account.</span>
+          <span><strong>What to expect:</strong> The agent manages saved items: viewing shows products with prices, and adding confirms the product was found and saved. It asks for your email to identify your account.</span>
         </div>
 
         <p style="font-weight:700; margin:18px 0 8px; color:var(--nto-primary);">📍 Store Locator</p>
@@ -874,7 +874,7 @@
         </div>
         <div class="callout expect">
           <span class="callout-icon">✅</span>
-          <span><strong>What to expect:</strong> The agent returns NTO store details — name, address, phone, hours, and special features (like "Gear rental available" or "Ski demo center"). Colorado matches Denver and Boulder stores.</span>
+          <span><strong>What to expect:</strong> The agent returns NTO store details: name, address, phone, hours, and special features (like "Gear rental available" or "Ski demo center"). Colorado matches Denver and Boulder stores.</span>
         </div>
 
         <p style="font-weight:700; margin:18px 0 8px; color:var(--nto-primary);">⭐ Loyalty &amp; Customer Service (pre-built)</p>
@@ -949,7 +949,7 @@
 
         <div class="callout info">
           <span class="callout-icon">ℹ️</span>
-          <span>Every response comes from <strong>live data</strong> — actual products, orders, Knowledge articles, and store locations, not canned text. The agent routes each question to the right topic and action, and the two guardrail topics keep it focused and ask for detail when a request is vague.</span>
+          <span>Every response comes from <strong>live data</strong>: actual products, orders, Knowledge articles, and store locations, not canned text. The agent routes each question to the right topic and action, and the two guardrail topics keep it focused and ask for detail when a request is vague.</span>
         </div>
       </div>
     </div>
@@ -961,7 +961,7 @@
         <button class="complete-btn" onclick="toggleStep(this)">Mark Done</button>
       </div>
       <div class="step-body">
-        <p>Now try a full customer journey — one conversation that moves across several topics. Copy each prompt in order; the agent handles the switch between topics without any prompting from you.</p>
+        <p>Now try a full customer journey: one conversation that moves across several topics. Copy each prompt in order, and the agent handles the switch between topics without any prompting from you.</p>
 
         <div class="prompt-card">
           <div class="prompt-label">Step 1 — Product Search</div>
@@ -1035,7 +1035,7 @@
 
         <div class="callout success">
           <span class="callout-icon">🎯</span>
-          <span>That's seven prompts across seven topics — product search, FAQ, wishlist, store locator, loyalty, reviews, and marketing — and the agent picked the right action for each without you telling it which topic to use. Every answer came from live data.</span>
+          <span>That's seven prompts across seven topics: product search, FAQ, wishlist, store locator, loyalty, reviews, and marketing. The agent picked the right action for each without you telling it which topic to use, and every answer came from live data.</span>
         </div>
       </div>
     </div>
@@ -1063,7 +1063,7 @@
         </table>
         <div class="callout success">
           <span class="callout-icon">🏔️</span>
-          <span><strong>One agent, eleven topics.</strong> Trail Guide covers the whole customer journey — product discovery, order tracking, store visits, reviews, marketing — in plain conversation, grounded in real data, with guardrails to keep it on track.</span>
+          <span><strong>One agent, eleven topics.</strong> Trail Guide covers the whole customer journey in plain conversation: product discovery, order tracking, store visits, reviews, and marketing, all grounded in real data, with guardrails to keep it on track.</span>
         </div>
       </div>
     </div>
