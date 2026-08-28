@@ -258,6 +258,9 @@
     <a href="#unit6" class="nav-link" data-section="unit6">
       <span class="step-dot">6</span> Explore the Full Agent
     </a>
+    <a href="#unit7" class="nav-link" data-section="unit7">
+      <span class="step-dot">7</span> Agentforce Coworker
+    </a>
   </div>
   <div class="nav-section">
     <div class="nav-section-title">Resources</div>
@@ -274,7 +277,7 @@
   <div class="hero">
     <div class="tag">Dreamforce 2026 · Hands-On Workshop</div>
     <h1>Product Discovery<br>with Agentforce</h1>
-    <p>Build a Product Discovery topic for NTO's customer agent, then explore the other 10 topics already wired up: product search, FAQs, order tracking, wishlists, store locator, loyalty, customer service, reviews, marketing offers, and guardrails.</p>
+    <p>Build a Product Discovery topic for NTO's customer agent, explore the other 10 topics already wired up, then see your work invoked from Agentforce Coworker, the employee-facing AI surface.</p>
   </div>
 
   <!-- ── Intro ── -->
@@ -1069,6 +1072,123 @@
     </div>
   </div>
 
+  <!-- ── Unit 7: Agentforce Coworker ── -->
+  <div class="section" id="unit7">
+    <div class="unit-header">
+      <div class="unit-num">7</div>
+      <div class="unit-title">Agentforce Coworker: The Employee View</div>
+    </div>
+    <p style="font-size:14.5px; color:#444; margin-bottom:24px; line-height:1.7;">
+      Trail Guide is what customers talk to. Agentforce Coworker is what NTO employees talk to, and it can hand off to Trail Guide to get real answers, using the exact Product Discovery subagent you just built.
+    </p>
+
+    <div class="step">
+      <div class="step-header">
+        <div class="step-num">20</div>
+        <h3>Turn On Agentforce Coworker</h3>
+        <button class="complete-btn" onclick="toggleStep(this)">Mark Done</button>
+      </div>
+      <div class="step-body">
+        <ol>
+          <li>Click the <strong>gear icon</strong> (top right) to go to Setup.</li>
+          <li>In the Quick Find box, type <strong>"Einstein Setup"</strong>.</li>
+          <li>Find <strong>Turn on Beta Generative AI Models</strong> and switch it <strong>On</strong>.</li>
+          <li>In the Quick Find box, type <strong>"Agentforce Coworker"</strong> and select <strong>Get Started with Agentforce Coworker</strong>.</li>
+          <li>Click <strong>Get Started</strong>, then <strong>Turn On</strong>, and confirm the disclaimer.</li>
+        </ol>
+        <div class="callout">
+          <span class="callout-icon">💡</span>
+          <span>Coworker lives in the global search bar. It is not a separate app; it is built into the search experience employees already use every day.</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-header">
+        <div class="step-num">21</div>
+        <h3>Ask Coworker a Direct Question</h3>
+        <button class="complete-btn" onclick="toggleStep(this)">Mark Done</button>
+      </div>
+      <div class="step-body">
+        <p>Click the <strong>global search bar</strong> at the top of your org. Ask a plain-language question that pulls from CRM data directly:</p>
+        <div class="prompt-card">
+          <div class="prompt-label">Direct CRM lookup</div>
+          <p>How many open cases does NTO have this week?</p>
+          <button class="copy-prompt" onclick="copyPrompt(this)">Copy</button>
+        </div>
+        <div class="callout success">
+          <span class="callout-icon">✅</span>
+          <span><strong>Expect:</strong> Coworker answers straight from Case records. No agent hand-off needed, since this is a simple lookup Coworker can resolve itself.</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-header">
+        <div class="step-num">22</div>
+        <h3>Watch Coworker Hand Off to Trail Guide</h3>
+        <button class="complete-btn" onclick="toggleStep(this)">Mark Done</button>
+      </div>
+      <div class="step-body">
+        <p>Now ask something that needs an actual customer-facing agent to answer, not just a record lookup.</p>
+        <div class="prompt-card">
+          <div class="prompt-label">Hand-off to Trail Guide</div>
+          <p>Does the Ridgeline Hiking Boot show up when a customer searches for hiking boots?</p>
+          <button class="copy-prompt" onclick="copyPrompt(this)">Copy</button>
+        </div>
+        <div class="callout success">
+          <span class="callout-icon">✅</span>
+          <span><strong>Expect:</strong> Coworker recognizes this needs Trail Guide, hands the request off, and Trail Guide's Product Discovery subagent (the one you built in Unit 3) runs the actual search and returns the answer, all inside the same Coworker conversation.</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-header">
+        <div class="step-num">23</div>
+        <h3>Try a Second Hand-Off</h3>
+        <button class="complete-btn" onclick="toggleStep(this)">Mark Done</button>
+      </div>
+      <div class="step-body">
+        <div class="prompt-card">
+          <div class="prompt-label">Price-filtered search via Trail Guide</div>
+          <p>Check if we have any rain jackets under $200 in stock.</p>
+          <button class="copy-prompt" onclick="copyPrompt(this)">Copy</button>
+        </div>
+        <div class="callout success">
+          <span class="callout-icon">✅</span>
+          <span><strong>Expect:</strong> Same pattern. Coworker routes to Trail Guide, Trail Guide's Product Discovery subagent filters the live catalog by price, and the result flows back through Coworker.</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-header">
+        <div class="step-num">24</div>
+        <h3>Compare the Two Entry Points</h3>
+        <button class="complete-btn" onclick="toggleStep(this)">Mark Done</button>
+      </div>
+      <div class="step-body">
+        <table>
+          <tr><th></th><th>Trail Guide</th><th>Agentforce Coworker</th></tr>
+          <tr><td><strong>Who talks to it</strong></td><td>Customers</td><td>NTO employees</td></tr>
+          <tr><td><strong>Where it lives</strong></td><td>Embedded chat / Conversation Preview</td><td>Global Salesforce search bar (also Slack, Teams)</td></tr>
+          <tr><td><strong>What it's built from</strong></td><td>Subagents (Product Discovery, Loyalty, etc.)</td><td>Orchestrates whole agents, Flows, CRM actions, APIs</td></tr>
+          <tr><td><strong>What you built</strong></td><td>The Product Discovery subagent itself</td><td>&mdash;</td></tr>
+          <tr><td><strong>What it proves</strong></td><td>The subagent answers correctly in isolation</td><td>The subagent is wired into the org, reachable from anywhere</td></tr>
+        </table>
+        <div class="callout">
+          <span class="callout-icon">ℹ️</span>
+          <span><strong>Key concept:</strong> Coworker does not call subagents directly. It calls agents (like Trail Guide). Trail Guide's own reasoning engine then routes internally to the right subagent. Coworker sees "Trail Guide" as one capability; it never picks the subagent itself.</span>
+        </div>
+        <div class="callout success">
+          <span class="callout-icon">🎯</span>
+          <span><strong>The point:</strong> the Product Discovery subagent you built in Unit 3 is not just a demo inside one preview panel. It is a real capability other parts of the org, including a completely different AI surface, can call on.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- ── Resources ── -->
   <div class="section" id="resources">
     <div class="unit-header">
@@ -1151,7 +1271,7 @@
   }
 
   function updateNavDots() {
-    const sections = ['intro','unit0','unit1','unit2','unit3','unit4','unit5','unit6','resources'];
+    const sections = ['intro','unit0','unit1','unit2','unit3','unit4','unit5','unit6','unit7','resources'];
     sections.forEach(id => {
       const section = document.getElementById(id);
       if (!section) return;
