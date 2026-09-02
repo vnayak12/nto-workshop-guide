@@ -304,6 +304,7 @@
           <tr><td>4</td><td>Test the agent with real product queries</td><td>~12 min</td></tr>
           <tr><td>5</td><td>Add a new product and see it show up in search results right away</td><td>~10 min</td></tr>
           <tr><td>6</td><td>Explore all 11 topics, run a multi-topic conversation, and recap</td><td>~10 min</td></tr>
+          <tr><td>7</td><td>See your work invoked from Agentforce Coworker, the employee AI surface</td><td>~10 min</td></tr>
         </table>
       </div>
     </div>
@@ -322,7 +323,9 @@
           <tr><td><strong>Action</strong></td><td>A backend function the subagent can call (e.g., Search Product Catalog)</td></tr>
           <tr><td><strong>Asset Library</strong></td><td>A library of pre-built subagents you can add to your agent</td></tr>
           <tr><td><strong>Explorer</strong></td><td>The left panel in Agentforce Builder showing your agent's subagents and resources</td></tr>
-          <tr><td><strong>Commit Version</strong></td><td>Publishing your draft changes so the agent uses them</td></tr>
+          <tr><td><strong>New Version</strong></td><td>Creates an editable draft from the current active version</td></tr>
+          <tr><td><strong>Commit Version</strong></td><td>Publishes your draft changes and makes them the active version</td></tr>
+          <tr><td><strong>Agentforce Coworker</strong></td><td>The employee-facing AI surface built into the global search bar; can hand off to agents like Trail Guide</td></tr>
         </table>
       </div>
     </div>
@@ -472,7 +475,7 @@
       <div class="unit-title">Meet Trail Guide Agent</div>
     </div>
     <p style="font-size:14.5px; color:#444; margin-bottom:24px; line-height:1.7;">
-      Trail Guide is NTO's AI shopping assistant. It's pre-configured with two subagents (Customer Service and Loyalty), but it <strong>can't search products yet</strong>. That's what you'll build.
+      Trail Guide is NTO's AI shopping assistant. It's pre-configured with 10 subagents covering customer service, orders, loyalty, wishlists, store locator, knowledge, reviews, marketing, and guardrails — but it <strong>can't search products yet</strong>. That's what you'll build.
     </p>
 
     <div class="step">
@@ -508,12 +511,22 @@
         <button class="complete-btn" onclick="toggleStep(this)">Mark Done</button>
       </div>
       <div class="step-body">
-        <p>Take a minute to look around. In the <strong>Explorer</strong> panel (left side), expand the <strong>Subagents</strong> folder. Trail Guide has:</p>
+        <p>Take a minute to look around. In the <strong>Explorer</strong> panel (left side), expand the <strong>Subagents</strong> folder. Trail Guide has these pre-configured subagents:</p>
         <table>
           <tr><th>Subagent</th><th>What It Does</th></tr>
           <tr><td><strong>Customer Service</strong></td><td>Handles profile lookup, order history, case management, product returns</td></tr>
           <tr><td><strong>Loyalty and Promotions</strong></td><td>Manages loyalty points, tier status, discounts, promo codes, proactive offers</td></tr>
+          <tr><td><strong>Product FAQ and Knowledge</strong></td><td>Answers product questions from the NTO knowledge base</td></tr>
+          <tr><td><strong>Order Status and Tracking</strong></td><td>Looks up orders and shows items and shipping status</td></tr>
+          <tr><td><strong>Cart and Wishlist</strong></td><td>Manages saved items and wishlist</td></tr>
+          <tr><td><strong>Store Locator</strong></td><td>Finds nearby NTO retail stores</td></tr>
+          <tr><td><strong>Feedback and Reviews</strong></td><td>Handles product reviews and customer feedback</td></tr>
+          <tr><td><strong>Marketing and Offers</strong></td><td>Manages alert preferences and marketing subscriptions</td></tr>
         </table>
+        <div class="callout info">
+          <span class="callout-icon">ℹ️</span>
+          <span>You'll also see <strong>Entry Point</strong> (the router that directs conversations), <strong>Off Topic</strong>, and <strong>Ambiguous Question</strong> (guardrails). These are internal components, not customer-facing topics.</span>
+        </div>
         <div class="callout warn">
           <span class="callout-icon">⚠️</span>
           <span><strong>What's missing?</strong> There's no Product Discovery subagent. If a customer asks "what jackets do you have?", the agent has no way to answer. <strong>You're about to fix that.</strong></span>
@@ -539,12 +552,31 @@
     <div class="step">
       <div class="step-header">
         <div class="step-num">9</div>
+        <h3>Create a New Version (Draft)</h3>
+        <button class="complete-btn" onclick="toggleStep(this)">Mark Done</button>
+      </div>
+      <div class="step-body">
+        <p>Trail Guide is currently on <strong>Version 1 (Active)</strong>. You can't edit an active version directly; you need to create a draft first.</p>
+        <ol>
+          <li>In the top-right corner of the builder, click <strong>New Version</strong>.</li>
+          <li>The header will change to <strong>Version 2 (Draft)</strong>. You're now on an editable draft.</li>
+        </ol>
+        <div class="callout info">
+          <span class="callout-icon">ℹ️</span>
+          <span>Notice that the <strong>Add Resource</strong> button (next to the search box in the Explorer panel) is now enabled. On an active version, this button is disabled.</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-header">
+        <div class="step-num">10</div>
         <h3>Add the Product Discovery Subagent</h3>
         <button class="complete-btn" onclick="toggleStep(this)">Mark Done</button>
       </div>
       <div class="step-body">
         <ol>
-          <li>In the Agentforce Builder, look at the <strong>Explorer</strong> panel (left side). Click the <strong>Add Resource</strong> button (near the top of the Explorer panel, next to the search box).</li>
+          <li>In the <strong>Explorer</strong> panel (left side), click the <strong>Add Resource</strong> button (next to the search box).</li>
         </ol>
         <div class="screenshot">
           <img src="img/builder-add-resource.png" alt="Add Resource menu showing options">
@@ -554,12 +586,12 @@
           <li>From the menu, select <strong>"Add from Asset Library"</strong>.</li>
         </ol>
         <div class="screenshot">
-          <img src="img/asset-library-all.png" alt="Asset Library dialog">
-          <div class="caption">The Asset Library dialog opens — showing all available subagents</div>
+          <img src="img/asset-library-all.png" alt="Subagents dialog from Asset Library">
+          <div class="caption">The Subagents dialog opens, showing all available subagents you can add to your agent</div>
         </div>
         <ol start="3">
           <li>In the search box at the top, type <strong>"Product Discovery"</strong>.</li>
-          <li>You'll see <strong>Product Discovery</strong> appear in the results. Click it to select it, then click <strong>Add</strong>.</li>
+          <li>You'll see <strong>Product Discovery</strong> appear in the results. Click <strong>Select</strong>, then click <strong>Add to Agent</strong>.</li>
         </ol>
         <div class="screenshot">
           <img src="img/asset-library-product-discovery.png" alt="Product Discovery found in search results">
@@ -574,7 +606,7 @@
 
     <div class="step">
       <div class="step-header">
-        <div class="step-num">10</div>
+        <div class="step-num">11</div>
         <h3>Review What's Included</h3>
         <button class="complete-btn" onclick="toggleStep(this)">Mark Done</button>
       </div>
@@ -598,14 +630,14 @@
 
     <div class="step">
       <div class="step-header">
-        <div class="step-num">11</div>
+        <div class="step-num">12</div>
         <h3>Commit Your Changes</h3>
         <button class="complete-btn" onclick="toggleStep(this)">Mark Done</button>
       </div>
       <div class="step-body">
         <ol>
-          <li>Click <strong>Commit Version</strong> (top-right of the builder) to publish your changes.</li>
-          <li>Wait for the confirmation. Trail Guide now has Product Discovery capabilities.</li>
+          <li>Because you're on a draft version, the top-right corner shows a <strong>Commit Version</strong> button. Click it to publish your changes and make them live.</li>
+          <li>Wait for the confirmation. Trail Guide now has Product Discovery capabilities and your draft becomes the new active version.</li>
         </ol>
         <div class="callout warn">
           <span class="callout-icon">⚠️</span>
@@ -627,7 +659,7 @@
 
     <div class="step">
       <div class="step-header">
-        <div class="step-num">12</div>
+        <div class="step-num">13</div>
         <h3>Open Conversation Preview</h3>
         <button class="complete-btn" onclick="toggleStep(this)">Mark Done</button>
       </div>
@@ -641,7 +673,7 @@
 
     <div class="step">
       <div class="step-header">
-        <div class="step-num">13</div>
+        <div class="step-num">14</div>
         <h3>Run Test Queries</h3>
         <button class="complete-btn" onclick="toggleStep(this)">Mark Done</button>
       </div>
@@ -707,7 +739,7 @@
 
     <div class="step">
       <div class="step-header">
-        <div class="step-num">14</div>
+        <div class="step-num">15</div>
         <h3>Create a New Product</h3>
         <button class="complete-btn" onclick="toggleStep(this)">Mark Done</button>
       </div>
@@ -734,7 +766,7 @@
 
     <div class="step">
       <div class="step-header">
-        <div class="step-num">15</div>
+        <div class="step-num">16</div>
         <h3>Add a Standard Price</h3>
         <button class="complete-btn" onclick="toggleStep(this)">Mark Done</button>
       </div>
@@ -749,7 +781,7 @@
 
     <div class="step">
       <div class="step-header">
-        <div class="step-num">16</div>
+        <div class="step-num">17</div>
         <h3>Search for Your New Product</h3>
         <button class="complete-btn" onclick="toggleStep(this)">Mark Done</button>
       </div>
@@ -783,7 +815,7 @@
 
     <div class="step">
       <div class="step-header">
-        <div class="step-num">17</div>
+        <div class="step-num">18</div>
         <h3>Test All Agent Capabilities</h3>
         <button class="complete-btn" onclick="toggleStep(this)">Mark Done</button>
       </div>
@@ -959,7 +991,7 @@
 
     <div class="step">
       <div class="step-header">
-        <div class="step-num">18</div>
+        <div class="step-num">19</div>
         <h3>Multi-Topic Conversation Flow</h3>
         <button class="complete-btn" onclick="toggleStep(this)">Mark Done</button>
       </div>
@@ -1045,7 +1077,7 @@
 
     <div class="step">
       <div class="step-header">
-        <div class="step-num">19</div>
+        <div class="step-num">20</div>
         <h3>What You Built</h3>
         <button class="complete-btn" onclick="toggleStep(this)">Mark Done</button>
       </div>
@@ -1084,7 +1116,7 @@
 
     <div class="step">
       <div class="step-header">
-        <div class="step-num">20</div>
+        <div class="step-num">21</div>
         <h3>Turn On Agentforce Coworker</h3>
         <button class="complete-btn" onclick="toggleStep(this)">Mark Done</button>
       </div>
@@ -1105,7 +1137,7 @@
 
     <div class="step">
       <div class="step-header">
-        <div class="step-num">21</div>
+        <div class="step-num">22</div>
         <h3>Ask Coworker a Direct Question</h3>
         <button class="complete-btn" onclick="toggleStep(this)">Mark Done</button>
       </div>
@@ -1125,7 +1157,7 @@
 
     <div class="step">
       <div class="step-header">
-        <div class="step-num">22</div>
+        <div class="step-num">23</div>
         <h3>Watch Coworker Hand Off to Trail Guide</h3>
         <button class="complete-btn" onclick="toggleStep(this)">Mark Done</button>
       </div>
@@ -1145,7 +1177,7 @@
 
     <div class="step">
       <div class="step-header">
-        <div class="step-num">23</div>
+        <div class="step-num">24</div>
         <h3>Try a Second Hand-Off</h3>
         <button class="complete-btn" onclick="toggleStep(this)">Mark Done</button>
       </div>
@@ -1164,7 +1196,7 @@
 
     <div class="step">
       <div class="step-header">
-        <div class="step-num">24</div>
+        <div class="step-num">25</div>
         <h3>Compare the Two Entry Points</h3>
         <button class="complete-btn" onclick="toggleStep(this)">Mark Done</button>
       </div>
