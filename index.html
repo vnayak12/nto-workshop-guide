@@ -1145,7 +1145,7 @@
         <p>Click the <strong>global search bar</strong> at the top of your org. Ask a plain-language question that pulls from CRM data directly:</p>
         <div class="prompt-card">
           <div class="prompt-label">Direct CRM lookup</div>
-          <p>How many open cases does NTO have this week?</p>
+          <p>How many open cases does NTO have?</p>
           <button class="copy-prompt" onclick="copyPrompt(this)">Copy</button>
         </div>
         <div class="callout success">
@@ -1216,6 +1216,119 @@
         <div class="callout success">
           <span class="callout-icon">🎯</span>
           <span><strong>The point:</strong> the Product Discovery subagent you built in Unit 3 is not just a demo inside one preview panel. It is a real capability other parts of the org, including a completely different AI surface, can call on.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Unit 8: Agentforce Vibes ── -->
+  <div class="section" id="unit8">
+    <div class="unit-header">
+      <div class="unit-num">8</div>
+      <div class="unit-title">Build a Product Insights Dashboard with Agentforce Vibes</div>
+    </div>
+    <p style="font-size:14.5px; color:#444; margin-bottom:24px; line-height:1.7;">
+      In this bonus unit, you'll use Agentforce Vibes, Salesforce's AI-powered development tool, to build something different: a visual Product Insights Dashboard that surfaces patterns across the NTO catalog you've been searching all workshop &mdash; like which categories have the most products and where prices cluster.
+    </p>
+
+    <div class="step">
+      <div class="step-header">
+        <div class="step-num">26</div>
+        <h3>Launch Agentforce Vibes</h3>
+        <button class="complete-btn" onclick="toggleStep(this)">Mark Done</button>
+      </div>
+      <div class="step-body">
+        <ol>
+          <li>Select the <strong>Setup gear icon</strong>, then select <strong>Agentforce Vibes</strong>.</li>
+          <li>Accept the <strong>Terms and Conditions</strong>.</li>
+          <li>After accepting the terms and conditions, Agentforce Vibes will load. This could take a couple of minutes.</li>
+          <li>Select <strong>I agree</strong> to the terms on the left sidebar, then click <strong>Enable and Start Building</strong>.</li>
+        </ol>
+        <div class="callout">
+          <span class="callout-icon">💡</span>
+          <span>Agentforce Vibes turns natural language into working Apex, LWC, and other Salesforce metadata. It understands the org you're working in, so it can see the same Product2 data you've been searching all workshop.</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-header">
+        <div class="step-num">27</div>
+        <h3>Prompt Vibes to Build the Dashboard</h3>
+        <button class="complete-btn" onclick="toggleStep(this)">Mark Done</button>
+      </div>
+      <div class="step-body">
+        <p>You're going to build a Product Insights Dashboard &mdash; a Lightning Web Component that visualizes the NTO catalog at a glance: product counts by category, price ranges, and a few standout items.</p>
+        <ol>
+          <li>In the Vibes sidebar, enter a prompt like:</li>
+        </ol>
+        <div class="prompt-card">
+          <div class="prompt-label">Prompt for Vibes</div>
+          <p>Create a Lightning Web Component called Product Insights Dashboard that queries active Product2 and PricebookEntry records and displays: a bar chart of product count by category (Family), the average price per category, and a list of the 5 highest-priced active products. Use the Standard Price Book for pricing.</p>
+          <button class="copy-prompt" onclick="copyPrompt(this)">Copy</button>
+        </div>
+        <ol start="2">
+          <li>Watch as Vibes plans the component before writing anything. It will typically explain what it's about to generate, including the Apex controller and the LWC itself, before touching your org.</li>
+          <li>Review what it proposes: an Apex class exposing <code>@AuraEnabled</code> methods to fetch the aggregated data, plus the LWC markup and JavaScript to render it.</li>
+        </ol>
+        <div class="callout">
+          <span class="callout-icon">ℹ️</span>
+          <span><strong>Key concept:</strong> Vibes-generated code is a starting point, not a guarantee. Review the Apex controller the same way you'd review a teammate's pull request &mdash; especially anything touching SOQL aggregate queries.</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-header">
+        <div class="step-num">28</div>
+        <h3>Deploy and Add the Dashboard</h3>
+        <button class="complete-btn" onclick="toggleStep(this)">Mark Done</button>
+      </div>
+      <div class="step-body">
+        <ol>
+          <li>Once you're happy with what Vibes generated, tell it to deploy the component to your org:</li>
+        </ol>
+        <div class="prompt-card">
+          <div class="prompt-label">Prompt for Vibes</div>
+          <p>Deploy this component to my org.</p>
+          <button class="copy-prompt" onclick="copyPrompt(this)">Copy</button>
+        </div>
+        <ol start="2">
+          <li>Vibes will deploy the Apex controller and LWC directly to your org. Confirm the deployment succeeds with no errors before moving on.</li>
+        </ol>
+        <div class="callout success">
+          <span class="callout-icon">✅</span>
+          <span><strong>Expect:</strong> A "Deployment succeeded" confirmation showing both components created &mdash; an Apex Class (the controller) and an LWC Bundle (the dashboard component itself).</span>
+        </div>
+        <ol start="3">
+          <li>Go to the <strong>Sales App</strong>, open <strong>Accounts</strong>, and select <strong>Northern Trail Outfitters</strong>.</li>
+          <li>On the Account record page, click the <strong>gear icon</strong> (top right) and select <strong>Edit Page</strong> to open Lightning App Builder.</li>
+          <li>In the left-hand component panel, scroll to the <strong>Custom</strong> section and find <strong>ProductInsightsDashboard</strong>.</li>
+          <li>Drag it onto the Account record page layout.</li>
+          <li>Click <strong>Save</strong>, then click <strong>Activate</strong>.</li>
+          <li>Under <strong>App Default</strong>, select <strong>Assign as App Default</strong>.</li>
+          <li>Under <strong>Lightning Apps</strong>, select <strong>Sales</strong>, click <strong>Next</strong>.</li>
+          <li>Select <strong>Desktop</strong>, click <strong>Next</strong>.</li>
+          <li>Click <strong>Save</strong>.</li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-header">
+        <div class="step-num">29</div>
+        <h3>View Your Dashboard</h3>
+        <button class="complete-btn" onclick="toggleStep(this)">Mark Done</button>
+      </div>
+      <div class="step-body">
+        <p>Go back to the <strong>Northern Trail Outfitters</strong> Account record.</p>
+        <div class="callout success">
+          <span class="callout-icon">✅</span>
+          <span><strong>Expect:</strong> A visual breakdown of the NTO catalog &mdash; products grouped by category, average price per category, and a short list of the highest-priced items &mdash; all pulled live from the same Product2 and PricebookEntry data Trail Guide has been searching all workshop.</span>
+        </div>
+        <div class="callout">
+          <span class="callout-icon">💡</span>
+          <span><strong>Try it your way:</strong> ask Vibes to add a filter (e.g. only show categories with 3 or more products), or a second chart, such as price distribution within a single category.</span>
         </div>
       </div>
     </div>
