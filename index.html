@@ -1103,13 +1103,19 @@
         <button class="complete-btn" onclick="toggleStep(this)">Mark Done</button>
       </div>
       <div class="step-body">
+        <div class="callout info">
+          <span class="callout-icon">ℹ️</span>
+          <span><strong>Switch tabs:</strong> You've been working in the <strong>Agentforce Builder</strong>. Now switch to the browser tab where your <strong>Salesforce org</strong> is open (or open a new tab and navigate to your org). You need to go to <strong>Setup</strong> for this step.</span>
+        </div>
         <ol>
-          <li>Click the <strong>gear icon</strong> (top right) to go to Setup.</li>
-          <li>In the Quick Find box, type <strong>"Einstein Setup"</strong>.</li>
+          <li>Click the <strong>gear icon</strong> (top right) to go to <strong>Setup</strong>.</li>
+          <li>In the Quick Find box, type <strong>"Einstein Setup"</strong> and select it.</li>
           <li>Find <strong>Turn on Beta Generative AI Models</strong> and switch it <strong>On</strong>.</li>
           <li>In the Quick Find box, type <strong>"Agentforce Coworker"</strong> and select <strong>Get Started with Agentforce Coworker</strong>.</li>
-          <li>Click <strong>Get Started</strong>, then <strong>Turn On</strong>, and confirm the disclaimer.</li>
+          <li>Click <strong>Get Started</strong>, then click <strong>Turn On</strong>.</li>
+          <li>A confirmation dialog will appear asking <strong>"Turn on Agentforce Coworker?"</strong> — review the details and click <strong>Turn On</strong> to confirm.</li>
         </ol>
+        <img src="img/coworker-turn-on.png" alt="Turn on Agentforce Coworker confirmation dialog" style="max-width:100%; border:1px solid #ddd; border-radius:8px; margin:16px 0;" />
         <div class="callout">
           <span class="callout-icon">💡</span>
           <span>Coworker lives in the global search bar. It is not a separate app; it is built into the search experience employees already use every day.</span>
@@ -1124,6 +1130,10 @@
         <button class="complete-btn" onclick="toggleStep(this)">Mark Done</button>
       </div>
       <div class="step-body">
+        <div class="callout info">
+          <span class="callout-icon">ℹ️</span>
+          <span><strong>Switch views:</strong> Close or navigate away from <strong>Setup</strong>. Go to the main Salesforce org view (for example, click the <strong>App Launcher</strong> or the <strong>Home</strong> tab). You should see the <strong>global search bar</strong> at the top of the page.</span>
+        </div>
         <p>Click the <strong>global search bar</strong> at the top of your org. Ask a plain-language question that pulls from CRM data directly:</p>
         <div class="prompt-card">
           <div class="prompt-label">Direct CRM lookup</div>
