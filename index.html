@@ -1130,10 +1130,11 @@
         <button class="complete-btn" onclick="toggleStep(this)">Mark Done</button>
       </div>
       <div class="step-body">
-        <div class="callout info">
-          <span class="callout-icon">ℹ️</span>
-          <span><strong>Switch views:</strong> Close or navigate away from <strong>Setup</strong>. Go to the main Salesforce org view (for example, click the <strong>App Launcher</strong> or the <strong>Home</strong> tab). You should see the <strong>global search bar</strong> at the top of the page.</span>
-        </div>
+        <ol>
+          <li>Click the <strong>App Launcher</strong> (9-dot grid icon, top-left corner).</li>
+          <li>Search for and select the <strong>Service</strong> app.</li>
+        </ol>
+        <img src="img/coworker-service-app.png" alt="App Launcher with Service app selected" style="max-width:100%; border:1px solid #ddd; border-radius:8px; margin:16px 0;" />
         <p>Click the <strong>global search bar</strong> at the top of your org. Ask a plain-language question that pulls from CRM data directly:</p>
         <div class="prompt-card">
           <div class="prompt-label">Direct CRM lookup</div>
@@ -1143,6 +1144,28 @@
         <div class="callout success">
           <span class="callout-icon">✅</span>
           <span><strong>Expect:</strong> Coworker answers straight from Case records. No agent hand-off needed, since this is a simple lookup Coworker can resolve itself.</span>
+        </div>
+
+        <img src="img/coworker-case-history.png" alt="Coworker showing case history" style="max-width:100%; border:1px solid #ddd; border-radius:8px; margin:16px 0;" />
+
+        <div class="prompt-card">
+          <div class="prompt-label">Case History Lookup</div>
+          <p>What's the history on the oldest case, and what should I do next?</p>
+          <button class="copy-prompt" onclick="copyPrompt(this)">Copy</button>
+        </div>
+        <div class="callout success">
+          <span class="callout-icon">✅</span>
+          <span><strong>Expect:</strong> Coworker pulls up the oldest open case, summarizes its history, and suggests a next action.</span>
+        </div>
+
+        <div class="prompt-card">
+          <div class="prompt-label">Create a Follow-Up Task</div>
+          <p>Create a task to follow up with the customer by September 18th to update them on their order status.</p>
+          <button class="copy-prompt" onclick="copyPrompt(this)">Copy</button>
+        </div>
+        <div class="callout success">
+          <span class="callout-icon">✅</span>
+          <span><strong>Expect:</strong> Coworker proposes a Task with the follow-up due date, linked to the customer/case. Click <strong>Confirm</strong> to create it.</span>
         </div>
       </div>
     </div>
