@@ -1278,6 +1278,10 @@
       <div class="step-body">
         <p>You're going to build a Product Insights Dashboard &mdash; a Lightning Web Component that visualizes the NTO catalog at a glance: product counts by category, price ranges, and a few standout items.</p>
         <ol>
+          <li>In the left sidebar, click the <strong>Codey</strong> icon to open the Agentforce Vibes chat panel.</li>
+        </ol>
+        <img src="img/af-vibes.png" alt="Agentforce Vibes sidebar with Codey icon" style="max-width:100%; border:1px solid #ddd; border-radius:8px; margin:16px 0;" />
+        <ol start="2">
           <li>In the Vibes sidebar, enter a prompt like:</li>
         </ol>
         <div class="prompt-card">
@@ -1285,14 +1289,14 @@
           <p>Create a Lightning Web Component called Product Insights Dashboard that queries active Product2 and PricebookEntry records and displays: a bar chart of product count by category (Family), the average price per category, and a list of the 5 highest-priced active products. Use the Standard Price Book for pricing.</p>
           <button class="copy-prompt" onclick="copyPrompt(this)">Copy</button>
         </div>
-        <ol start="2">
+        <ol start="3">
           <li>Watch as Vibes plans the component before writing anything. It will typically explain what it's about to generate, including the Apex controller and the LWC itself, before touching your org.</li>
         </ol>
         <div class="callout warn">
           <span class="callout-icon">⚠️</span>
           <span><strong>Stay at your screen:</strong> Vibes will pause several times and ask for permission to <strong>Run</strong> before it takes actions (e.g. creating files, deploying metadata). Watch for these prompts and click <strong>Run</strong> when they appear to continue with the build.</span>
         </div>
-        <ol start="3">
+        <ol start="4">
           <li>Review what it proposes: an Apex class exposing <code>@AuraEnabled</code> methods to fetch the aggregated data, plus the LWC markup and JavaScript to render it.</li>
         </ol>
         <div class="callout">
